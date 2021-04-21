@@ -41,11 +41,15 @@ def attractions():
 		page=request.args.get("page",0)
 		keyword=request.args.get("keyword",None)
 		result=[]
-		firstdataId=1+(12*int(page))
-		finaldataId=12+(12*int(page))
+		firstdata=0+(12*int(page))
+		finaldata=12+(12*int(page))
 		# 是否有關鍵字
 		if keyword==None:
-			cursor.execute("select * from taipeitrip.data where id between %s and %s",[firstdataId,finaldataId])  #執行SQL
+			# 根據緯度排序後抓取資料
+			if firstdata==0:
+				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit  %s ",[finaldata])
+			else:
+				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit %s , %s ",[firstdata,finaldata])  #執行SQL
 			database=cursor.fetchall()
 			dataDict={}
 			data=[]
@@ -53,20 +57,21 @@ def attractions():
 			# 抓取12筆資料
 			while n<12:
 				dataDict={
-					"id":database[n][0],
+					"id":int(database[n][0]),
 					"name":database[n][1],
 					"category":database[n][2],
 					"description":database[n][3],
 					"address":database[n][4],
 					"transport":database[n][5],
 					"mrt":database[n][6],
-					"latitude":database[n][7],
-					"longitude":database[n][8],
-					"images":database[n][9]
+					"latitude":float(database[n][7]),
+					"longitude":float(database[n][8]),
+					"images":eval(database[n][9])
 				} 
 				data.append(dataDict)
 				n+=1
-			return {"nextpage":page,"data":data}
+			nextpage=int(page)+1
+			return {"nextpage":nextpage,"data":data}
 		else:
 			# 抓取關鍵字資料
 			cursor.execute("select * from taipeitrip.data where name=%s",[keyword])
@@ -75,22 +80,43 @@ def attractions():
 			dataDict={}
 			data=[]
 			n=0
-			while n<databaseNumber:
-				dataDict={
-						"id":database[n][0],
-						"name":database[n][1],
-						"category":database[n][2],
-						"description":database[n][3],
-						"address":database[n][4],
-						"transport":database[n][5],
-						"mrt":database[n][6],
-						"latitude":database[n][7],
-						"longitude":database[n][8],
-						"images":database[n][9]
-					} 
-				data.append(dataDict)
-				n+=1
-			return {"nextpage":page,"data":data}
+			# 資料數是否大於12
+			if databaseNumber>12:
+				while n<12:
+					dataDict={
+							"id":int(database[n][0]),
+							"name":database[n][1],
+							"category":database[n][2],
+							"description":database[n][3],
+							"address":database[n][4],
+							"transport":database[n][5],
+							"mrt":database[n][6],
+							"latitude":float(database[n][7]),
+							"longitude":float(database[n][8]),
+							"images":eval(database[n][9])
+						} 
+					data.append(dataDict)
+					n+=1
+				nextpage=page+1
+				return {"nextpage":nextpage,"data":data}
+			else:
+				while n<databaseNumber:
+					dataDict={
+							"id":int(database[n][0]),
+							"name":database[n][1],
+							"category":database[n][2],
+							"description":database[n][3],
+							"address":database[n][4],
+							"transport":database[n][5],
+							"mrt":database[n][6],
+							"latitude":float(database[n][7]),
+							"longitude":float(database[n][8]),
+							"images":eval(database[n][9])
+						} 
+					data.append(dataDict)
+					n+=1
+				nextpage=None
+				return {"nextpage":nextpage,"data":data}
 	except:
 		return{"error": True,"message": "連線失敗"}
 
@@ -104,19 +130,19 @@ def attractionId(attractionId):
 		database=cursor.fetchall()
 		databaseNumber=len(database)
 		dataDict={}
+		# 編號id是否存在
 		if database!=None:
-			print("234")
 			dataDict={
-					"id":database[0][0],
+					"id":int(database[0][0]),
 					"name":database[0][1],
 					"category":database[0][2],
 					"description":database[0][3],
 					"address":database[0][4],
 					"transport":database[0][5],
 					"mrt":database[0][6],
-					"latitude":database[0][7],
-					"longitude":database[0][8],
-					"images":database[0][9]
+					"latitude":float(database[0][7]),
+					"longitude":float(database[0][8]),
+					"images":eval(database[0][9])
 				} 
 			return {"data":dataDict}	
 		else:
@@ -125,5 +151,5 @@ def attractionId(attractionId):
 		return {"error": True,"message": "伺服器發生錯誤"}
 
 
-
+# app.run(port=3000)
 app.run(host="0.0.0.0",port=3000)
