@@ -54,24 +54,43 @@ def attractions():
 			dataDict={}
 			data=[]
 			n=0
-			# 抓取12筆資料
-			while n<12:
-				dataDict={
-					"id":int(database[n][0]),
-					"name":database[n][1],
-					"category":database[n][2],
-					"description":database[n][3],
-					"address":database[n][4],
-					"transport":database[n][5],
-					"mrt":database[n][6],
-					"latitude":float(database[n][7]),
-					"longitude":float(database[n][8]),
-					"images":eval(database[n][9])
-				} 
-				data.append(dataDict)
-				n+=1
-			nextpage=int(page)+1
-			return {"nextPage":nextpage,"data":data}
+			# 判斷資料是否有12筆資料 (是否為page最後一頁)
+			if len(database)<12 :
+				while n<len(database):
+					dataDict={
+						"id":int(database[n][0]),
+						"name":database[n][1],
+						"category":database[n][2],
+						"description":database[n][3],
+						"address":database[n][4],
+						"transport":database[n][5],
+						"mrt":database[n][6],
+						"latitude":float(database[n][7]),
+						"longitude":float(database[n][8]),
+						"images":eval(database[n][9])
+					} 
+					data.append(dataDict)
+					n+=1
+				nextpage=None
+				return {"nextPage":nextpage,"data":data}
+			else:
+				while n<12:
+					dataDict={
+						"id":int(database[n][0]),
+						"name":database[n][1],
+						"category":database[n][2],
+						"description":database[n][3],
+						"address":database[n][4],
+						"transport":database[n][5],
+						"mrt":database[n][6],
+						"latitude":float(database[n][7]),
+						"longitude":float(database[n][8]),
+						"images":eval(database[n][9])
+					} 
+					data.append(dataDict)
+					n+=1
+				nextpage=int(page)+1
+				return {"nextPage":nextpage,"data":data}
 		else:
 			# 抓取關鍵字資料
 			keyword="%"+keyword+"%"
