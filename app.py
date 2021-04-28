@@ -42,7 +42,8 @@ def attractions():
 		keyword=request.args.get("keyword",None)
 		result=[]
 		firstdata=0+(12*int(page))
-		finaldata=12+(12*int(page))
+		# finaldata=12+(12*int(page))
+		finaldata=12
 		# 是否有關鍵字
 		if keyword==None:
 			# 根據緯度排序後抓取資料

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>台北一日遊</title>
+</head>
+<style type="text/css">
+
+body{
+    margin: 54px 0px 0px 0px ;
+    font-family: 'Noto Sans TC', sans-serif;;
+}
+header{
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 54px;
+    left: 0px;
+    top: 0px;
+
+
+}
+#head{
+    max-width: 1200px;
+    height: 54px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+#headLeft{
+    color: #448899;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 34px;
+}
+#headRight{
+    color: #666666;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+}
+#headRight>a{
+    margin: 0px 10px;
+}
+.total{
+    width: 1200px;
+    margin-left:auto;
+    margin-right: auto;
+    /* border: blue 1px solid; */
+
+}
+#heroSection{
+    background: url(/static/welcome\ 1.png),linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+    background-position:80% 0px;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 320px;
+    /* padding: auto; */
+    /* padding-left: 18%; */
+
+}
+#hero{
+    max-width: 1200px;
+    margin: auto;
+
+}
+#heroOne{
+    /* margin: 0px 20% 0px 20%; */
+    padding: 85px 10px 0px 10px;
+    width: auto;
+    height: 41px;
+    color: #F8F8F8;
+    text-align: left;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 24px;
+}
+#heroTwo{
+    margin: 15px 0px 0px 0px;
+    padding: 0px 10px;
+    width: auto;
+    height: 22px;
+    color: #F8F8F8;
+    text-align: left;
+    line-height: 13.3px;
+    font-size:16px;
+    font-style: normal;
+}
+#searchPar{
+    display: flex;
+    width: 100%;
+    padding-left: 10px;
+}
+#searchInput{
+    margin: 25px 0px 0px 0px;
+    padding: 0px 10px;
+    text-align: left;
+    height: 46px;
+    width: 30%;
+    border-radius:5px 0px 0px 5px;
+    border:0px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+}
+#searchImg{
+    
+    margin-top: 25px;
+    width: 60px;
+    height: 46px;
+    border-radius:0px 5px 5px 0px;
+    background: url(/static/icon_search.png);
+    background-color: #448899;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: center center;
+    
+}
+.content{
+    color: #757575;
+    margin: 55px auto 25px auto ;
+    max-width: 1200px;
+    position: relative;
+}
+.card{
+    height: 242px;
+    width:22%;
+    background: white;
+    margin: 0px 15px 30px 15px;
+    display: inline-block;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    border-radius: 5px;
+    
+}
+.photo{
+    height: 202px;
+}
+.img{
+    /* width: 270px; */
+    height: 158px;
+
+    
+}
+.name{
+    height: 22px;
+    padding: 15px 10px 7px 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    
+}
+.describe{
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px 12px 10px;
+}
+footer{
+    background: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+}
+#foot{
+    line-height: 13px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+} 
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    #head{
+        padding:  0px 5%;
+    }
+    .content{
+        width:650px;
+        margin:55px auto 55px auto;
+        text-align: center
+
+    }
+    .card{
+        height: 242px;
+        width:280px;
+        background: white;
+        margin: 15px 1.5% 15px 1.5%;
+        /* padding:15px 2.5% 15px 2.5%; */
+    }
+    .name{
+        text-align:left
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #head{
+        padding:  0px 0.5%;
+    }
+    #headLeft{
+        margin-left: 10px;
+    }
+    #heroSection{
+        height: 280px;
+        background: url(/static/welcome\ 1.png),linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+        background-size: 276px,auto 280px;
+        background-repeat: no-repeat;
+        background-position: 150% bottom ,left top;
+    }
+    #heroOne{
+        padding-top: 65px;
+        padding-left: auto;
+    }
+    #searchInput{
+        width: 230px;
+    }
+    .content{
+        width: 322px;
+        margin-top: 47.5px;
+    }
+    .card{
+        width: 322px;
+        height: 280px;
+        margin: 7.5px auto;
+    }
+    .photo{
+        height: 232px;
+    }
+    .img{
+        width: 322px;
+        height: 202px;
+        
+        padding-bottom: 8px;
+    }
+    .photo>.img>img{
+        width: 321px;
+        height: 202px;
+        object-fit: cover;
+        border-radius: 5px 5px 0px 0px ;
+    }
+    .name{
+        height: 22px;
+        padding: 0px;
+        margin: 8px auto 48px 10px;
+    }
+    .describe{
+        padding-top: 15px;
+        padding-bottom: 13px;
+        height: 20px;
+    }
+}
+
+</style>
+<header>
+    <div id="head">
+        <div id="headLeft"><a>台北一日遊</a></div>
+        <div id="headRight">
+            <a>預定行程</a>
+            <a>登入/註冊</a>
+        </div>
+        
+    </div>  
+</header>
+<body onload="getData()">
+    <div id=heroSection >
+        <div id="hero">
+            <div id="heroOne" >輕鬆享受台北一日悠閒</div>
+            <div id="heroTwo" >探索每個角落，體驗城市的深度旅遊行程</div>
+            <div  id="searchPar">
+                <input type="text" id="searchInput" placeholder="輸入景點名稱查詢"></input>
+                <div id="searchImg" onclick="searchData()"><img></div>
+            </div>
+        </div>  
+    </div>
+    <div class="content" id="content">
+    </div>
+</body>
+<footer>
+    <div id="foot">
+        COPYRIGHT © 2021 台北一日遊   
+    </div>
+</footer>
+</html>
+<script type="text/javascript">
+
+//節流function
+var throttle = function (fn, wait) { 
+    let timer, 
+        firstTime = true;
+        //判斷是不是第一次調用，第一次不需要延遲 
+        return function () { 
+            if (firstTime) { 
+                fn.apply(this, arguments); 
+                firstTime = false; 
+            }if (timer) { 
+                return false; 
+            } 
+            timer = setTimeout(() => { 
+                clearTimeout(timer); 
+                timer = null; //將timer進行初始化， 
+                fn.apply(this, arguments);
+            }, wait) ;
+        } ;
+    };
+
+var footer=document.querySelector("footer");
+window.addEventListener("scroll",throttle(function(){
+    // 計算footer距離
+    rect=footer.getBoundingClientRect();
+    // 判斷是否到達底部、是否還有更多資料
+    if(rect.top <= 1200){
+        if(page!="已無更多資料"){
+            moreData();
+        };
+    };
+},800));
+
+
+function createCard(data,whileNumber){
+    // 創card中所有div
+    var content=document.getElementById("content");
+    var cardDiv=document.createElement("div");
+    var photoDiv=document.createElement("div");
+    var imgDiv=document.createElement("div");
+    var nameDiv=document.createElement("div");
+    var img = document.createElement("img");
+    var describeImg=document.createElement("div");
+    var mrtDiv=document.createElement("div");
+    var categoryDiv=document.createElement("div");
+    // 為新div設定class
+    cardDiv.classList.add("card");
+    photoDiv.classList.add("photo");
+    imgDiv.classList.add("img");
+    nameDiv.classList.add("name");            
+    describeImg.classList.add("describe");
+    mrtDiv.classList.add("mrt");
+    categoryDiv.classList.add("category");
+    //抓取api資料
+    var Name = document.createTextNode(data.data[whileNumber].name);
+    var Category = document.createTextNode(data.data[whileNumber].category); 
+    // 判斷MRT是否為null
+    if(data.data[whileNumber].mrt==null){
+        var Mrt= document.createTextNode("無法搭乘捷運到達");
+    }else{
+        var Mrt = document.createTextNode(data.data[whileNumber].mrt);
+    };
+        
+    // 設定img參數
+    img.setAttribute("src",data.data[whileNumber].images[0]);
+    img.setAttribute("width","100%");
+    img.setAttribute("height","158px");
+    // 將div放入頁面
+    nameDiv.appendChild(Name);
+    mrtDiv.appendChild(Mrt);
+    categoryDiv.appendChild(Category);
+    content.appendChild(cardDiv);
+    cardDiv.appendChild(photoDiv);
+    photoDiv.appendChild(imgDiv);
+    photoDiv.appendChild(nameDiv);
+    imgDiv.appendChild(img);
+    cardDiv.appendChild(describeImg);
+    describeImg.appendChild(mrtDiv);
+    describeImg.appendChild(categoryDiv);
+};
+
+var page=0
+function getData(){
+    // 定位footer距離、移動視窗至最上方
+    rect=footer.getBoundingClientRect();
+    window.moveTo(0,0);
+    var req=new XMLHttpRequest();
+    req.open("get","/api/attractions");
+    req.onload=function(){
+        var data=JSON.parse(this.responseText);
+        // 判斷是否還有下頁資料
+        if(data.nextPage==null){
+            // 判斷最後一頁資料是否已印出
+            if(page!="已無更多資料"){
+                // 印出最後一頁資料
+                var whileNumber=0;
+                while (n<data.data.length){
+                    createCard(data,whileNumber);
+                    whileNumber+=1;
+                };
+                page="已無更多資料" ;
+            }else{
+                // alert("已無更多資料")
+            };
+        }else{
+            // 印出本頁資料
+            var whileNumber=0;
+            while (whileNumber<12){
+                createCard(data,whileNumber);
+                whileNumber+=1;
+            } 
+            page=data.nextPage ;
+        };
+    };
+    req.send();
+};
+function moreData(){
+    var req=new XMLHttpRequest();
+    var searchInput=document.getElementById("searchInput");
+    // 判斷使用者是否使用搜尋
+    if(searchInput.value==""){
+        req.open("get","/api/attractions?page="+page);
+        req.onload=function(){
+            var data=JSON.parse(this.responseText);
+            // 判斷是否有下一頁
+            if(data.nextPage==null){
+                if(page!="已無更多資料"){
+                    var n=0;
+                    while (n<data.data.length){
+                        createCard();
+                        n+=1;
+                    }
+                    page="已無更多資料" ;
+                }else{
+                    // alert("已無更多資料")
+                };
+            }else{
+                page=data.nextPage;
+                var whileNumber=0;
+                while (whileNumber<12){
+                    createCard(data,whileNumber);
+                    whileNumber+=1;
+                };
+            };
+        };
+    }else{
+        // 搜尋關鍵字
+        req.open("get","/api/attractions?page="+page+"&keyword="+searchInput.value);
+        req.onload=function(){
+            var data=JSON.parse(this.responseText);
+            // 判斷是否還有下一頁
+            if(data.nextPage==null){
+                if(page!="已無更多資料"){
+                    var whileNumber=0;
+                    while (whileNumber<data.data.length){
+                        createCard(data,whileNumber);
+                        whileNumber+=1;
+                    };
+                    page="已無更多資料" ;
+                }else{
+                    // alert("已無更多資料");
+                };
+            }else{
+                page=data.nextPage;
+                var whileNumber=0;
+                while (whileNumber<12){
+                    createCard(data,whileNumber);
+                    whileNumber+=1;
+                };
+            };
+            rect=footer.getBoundingClientRect();
+        };       
+    };
+    req.send();
+};
+
+function searchData(){
+    //刪除原有元素、設定page為0
+    var content=document.getElementById("content");
+    var card = document.getElementsByClassName("card");
+    var carLength=card.length;
+    for(i=0;i<carLength;i++){
+        content.removeChild(card[0]);
+    };
+    page=0;
+    //抓取關鍵字
+    var searchInput=document.getElementById("searchInput").value;
+    var req=new XMLHttpRequest();
+    req.open("get","/api/attractions?page="+page+"&keyword="+searchInput);
+    req.onload=function(){
+        var data=JSON.parse(this.responseText);
+        //判斷是否還有下一頁資料
+        if(data.nextPage==null){
+            var whileNumber=0;
+            while (whileNumber<data.data.length){
+                createCard(data,whileNumber);
+                whileNumber+=1;
+            };
+            page="已無更多資料";
+        }else{
+            page=data.nextPage;
+            var whileNumber=0;
+            while (whileNumber<12){
+                createCard(data,whileNumber);
+                whileNumber+=1;
+            };
+        };
+    };
+    req.send();
+};
+</script>
