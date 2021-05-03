@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>台北一日遊</title>
+</head>
+<style type="text/css">
+
+
+header{
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 54px;
+    left: 0px;
+    top: 0px;
+    border-bottom: 1px solid gainsboro;
+
+
+}
+#head{
+    max-width: 1200px;
+    height: 54px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+#headLeft{
+    color: #448899;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 34px;
+}
+#headRight{
+    color: #666666;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+}
+#headRight>a{
+    margin: 0px 10px;
+}
+
+body{
+    margin: 54px 0px 0px 0px ;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+#hero{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0px auto 37px auto;
+}
+
+#img{
+    width: 540px;
+    height: 406px;
+    margin-top: 37px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+#leftImg{
+    background: url(/static/btn_leftArrow.png);
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+}
+#rightImg{
+    background: url(/static/btn_rightArrow.png);
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+}
+#heroRight{
+    margin-top: 0px;
+    width: 600px;
+}
+#name{
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    height: 33px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+#category{
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 13.3px;
+    font-weight: 400;
+    color: #666666;
+}
+#heroRightbox{
+    width: 560px;
+    height: 246px;
+    background-color: #E8E8E8;
+    padding: 15px 20px 41px 20px;
+    margin-bottom: 11px;
+    border-radius: 5px;
+}
+#rightTitle{
+    margin-bottom:15px ;
+
+    height: 22px;
+    font-size: 16px;
+    line-height: 13.3px;
+    color: #666666;
+    font-weight: 700;
+}
+#rightIntro{
+    margin-bottom:15px ;
+    height: 24px;
+    font-size: 16px;
+    line-height: 13.3px;
+    font-weight: 400;
+    color: #666666;
+}
+.title{
+    font-size: 16px;
+    line-height: 13.3px;
+    color: #666666;
+    font-weight: 700;
+}
+#date{
+    margin-bottom: 24px;
+}
+#date>input{
+    margin-left: 5px;
+}
+#time{
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.timeCheck{
+    background: #FFFFFF;
+    width: 22px;
+    height: 22px;
+    border-radius: 22px;
+    margin-left: 12px;
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+}
+.changeTime{
+    width: 18px;
+    height:18px;
+    border-radius: 18px;
+    background-color: #448899;
+    margin: auto;
+}
+#rightTimeCheck{
+    margin-left: 18px;
+}
+.day{
+    display: flex;
+    font-size: 16px;
+    line-height: 13.3px;
+    font-weight: 400;
+    color: #666666;
+    /* margin-bottom: 15px; */
+    align-items: center;
+
+}
+#money{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+#moneyContent{
+    margin-left: 5px;
+    font-size: 16px;
+    line-height: 13.3px;
+    color: #666666;
+    font-weight: 400;
+}
+.moneyContent{
+    margin-left: 5px;
+}
+#button{
+    background-color: #448899;
+    width: 114px;
+    height: 16px;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    font-size: 19px;
+    line-height: 16px;
+    font-weight: 400;
+    align-items: center;
+    border-radius: 5px;
+}
+hr{
+    width: 1200px;
+}
+#bottom{
+    max-width: 1200px;
+    margin: 50px auto 120px auto;
+    font-size: 16px;
+    line-height: 23.17px;
+    font-weight: 400;
+    color: #666666;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.bottomTitle{
+    width: 1180px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 13.3px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+
+footer{
+    background: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+}
+#foot{
+    line-height: 13px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+} 
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    #head{
+        margin:  auto 10px;
+        padding:  0px 5%;
+    }
+    #header{
+        width: 100%;
+    }
+    #hero{
+        width: 100%;
+        display:unset;
+        align-items: center;
+        background-position: center;
+    }
+    #img{
+        width: 100%;
+        height: 350px;
+        background-size: auto 350px;
+        margin: 74px auto 0px auto;
+        background-position: center center;
+    }
+    #heroRight{
+        margin: 0px auto 30px auto;
+    }
+    
+    #address{
+        width: 600px;
+        height: 32px;
+
+    }
+    #bottom{
+        width: 600px;
+        margin-top: 30px;
+    }
+    .bottomTitle{
+        width: 600px;
+        height: 32px;
+
+    }
+    #description{
+        width: 600px;
+        line-height: 23.17px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+
+
+    }
+    #transport{
+        width: 600px;
+        line-height: 23.17px;
+
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #head{
+        padding:  0px 0.5%;
+        margin:  auto 10px;
+    }
+    #header{
+        width: 360px;
+    }
+    #headLeft{
+        margin-left: 10px;
+    }
+    #hero{
+        width: 360px;
+        display:unset;
+        align-items: center;
+        background-position: center;
+    }
+    body{
+        margin-top: 94px;
+    }
+    #heroRight{
+        margin: 0px auto;
+    }
+    #img{
+        width: 100%;
+        height: 350px;
+        background-size: auto 350px;
+        margin: 0px auto;
+        background-position: center center;
+    }
+    #heroRight{
+        margin-top: 0px;
+        width: 340px;
+    }
+    #heroRightbox{
+        width: 300px;
+        height: 270px;
+        padding-bottom: 15px;
+        margin-bottom: 40px;
+    }
+    #name{
+        width:340px;
+        margin-top: 20px;
+
+    }
+    #rightIntro{
+        line-height: 23.17px;
+        height:48px
+    }
+    hr{
+        width: 90%;
+        margin: 0px auto;
+    }
+    #address{
+        width: 330px;
+        height: 32px;
+
+    }
+    #bottom{
+        width: 330px;
+    }
+    .bottomTitle{
+        width: 330px;
+        height: 32px;
+
+    }
+    #description{
+        width: 330px;
+        line-height: 23.17px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+
+
+    }
+    #transport{
+        width: 330px;
+        line-height: 23.17px;
+
+    }
+
+}
+
+</style>
+<header>
+    <div id="head">
+        <div id="headLeft" onclick="location.href='/'"><a >台北一日遊</a></div>
+        <div id="headRight">
+            <a>預定行程</a>
+            <a>登入/註冊</a>
+        </div>
+        
+    </div>  
+</header>
+<body>
+    <div id="hero">
+        <div id="img">
+            <div id="leftImg"  onclick="leftImg()"></div>
+            <div id="rightImg" onclick="rightImg()"></div>
+        </div>
+        <div id="heroRight">
+            <div id="name"></div>
+            <div id="category"></div>
+            <div id="heroRightbox">
+                <div class="title" id="rightTitle">訂購導覽行程</div>
+                <div id="rightIntro">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+                <div class="title" id="date">選擇日期：<input type="date"></div>
+                <div class="title" id="time" >選擇時間：
+                    <div class="day" onclick="changeLeftTime()">
+                        <div class="timeCheck" id="leftTimeCheck" >
+                            <div  class="changeTime" id="changeLeftTime"></div>
+                        </div>
+                        <div>上半天</div>
+                    </div>
+                    <div class="day" onclick="changeRightTime()">
+                        <div class="timeCheck" id="rightTimeCheck" >
+                            <div  id="changeRightTime"></div>
+                        </div>
+                        <div>下半天</div>
+                    </div>
+                </div>
+                <div class="title" id="money">導覽費用： <div id="moneyContent">新台幣2000元</div></div>
+                <div id="button">開始預訂行程</div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="bottom">
+        <p id="description"></p>
+        <div class="bottomTitle">景點地址:</div>
+        <div id="address"></div>
+        <div class="bottomTitle" id="transportTitle">交通方式</div>
+        <div id="transport"></div>
+    </div>
+</body>
+<footer>
+    <div id="foot">
+        COPYRIGHT © 2021 台北一日遊   
+    </div>
+</footer>
+</html>
+<script type="text/javascript">
+    //選擇時間
+    function changeLeftTime(){
+        var changeLeftTime=document.getElementById("changeLeftTime")
+        var changeRightTime=document.getElementById("changeRightTime")
+        changeLeftTime.classList.add("changeTime")
+        changeRightTime.classList.remove("changeTime")
+        var moneyContent=document.getElementById("moneyContent")
+        var dollor="新台幣2000元"
+        moneyContent.textContent=dollor
+    }
+    function changeRightTime(){
+        var changeLeftTime=document.getElementById("changeLeftTime")
+        var changeRightTime=document.getElementById("changeRightTime")
+        changeLeftTime.classList.remove("changeTime")
+        changeRightTime.classList.add("changeTime")
+        var moneyContent=document.getElementById("moneyContent")
+        var dollor="新台幣2500元"
+        moneyContent.textContent=dollor
+    }
+    // 切換圖片
+    function leftImg(){
+        if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
+            imgNumber=data.data.images.length-1;
+            img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
+        }else{
+            imgNumber-=1;
+            img.style.backgroundImage="url("+data.data.images[imgNumber]+")";           
+        };
+    };
+    function rightImg(){
+        if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
+            imgNumber=1;
+            img.style.backgroundImage="url("+data.data.images[1]+")";
+        }else{
+            imgNumber+=1;
+            if(data.data.images[imgNumber]==null){
+                img.style.backgroundImage="url("+data.data.images[0]+")";
+            }else{
+                img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
+            };
+        };
+    };
+    // 抓取網址、連線api
+    var req=new XMLHttpRequest();
+    req.open("get","/api"+location.pathname);
+    req.onload=function(){
+        data=JSON.parse(this.responseText);
+        // 抓取id
+        var name=document.getElementById("name");
+        var transport=document.getElementById("transport");
+        var description=document.getElementById("description");
+        var address=document.getElementById("address");
+        var category=document.getElementById("category");
+        var img=document.getElementById("img");
+        // 創造api文字
+        var Name = document.createTextNode(data.data.name);
+        var Description = document.createTextNode(data.data.description);
+        var Address = document.createTextNode(data.data.address);
+        var Transport = document.createTextNode(data.data.transport);
+        // 判斷mrt是否為空值
+        if(data.data.mrt==null){
+            var Category = document.createTextNode(data.data.category);
+            category.appendChild(Category);
+        }else{
+            var Category = data.data.category;
+            var Mrt=data.data.mrt;
+            var content=Category+" at "+Mrt;
+            console.log(content);
+            var Content = document.createTextNode(content);
+            category.appendChild(Content);
+        };
+        // 填入api文字、圖片
+        name.appendChild(Name);
+        description.appendChild(Description);
+        address.appendChild(Address);
+        transport.appendChild(Transport);
+        img.style.backgroundImage="url("+data.data.images[0]+")";
+        //判斷交通方式是否為空值
+        console.log(data)
+        if(data.data.transport==null){
+            var transportTitle=document.getElementById("transportTitle")
+            var transport=document.getElementById("transport")
+            transportTitle.innerHTML=""
+            transport.innerHTML=""
+    }   
+    }
+    req.send();
+
+</script>
