@@ -319,16 +319,25 @@ var throttle = function (fn, wait) {
     };
 
 var footer=document.querySelector("footer");
-window.addEventListener("scroll",throttle(function(){
+function hello(){
     // 計算footer距離
+    
+    scrolled=false
     rect=footer.getBoundingClientRect();
     // 判斷是否到達底部、是否還有更多資料
-    if(rect.top <= 1200){
-        if(page!="已無更多資料"){
-            moreData();
-        };
+    if (scrolled==false){
+        scrolled=true
+        if(rect.top < 1000){
+            if(page!="已無更多資料"){   
+                window.removeEventListener("scroll",hello) ;   
+                moreData();
+                // window.moveTo(2000,2000);
+                                   
+                };        
+            };
     };
-},800));
+};
+window.addEventListener("scroll",throttle(hello,200));
 
 
 function createCard(data,whileNumber){
@@ -344,6 +353,7 @@ function createCard(data,whileNumber){
     var categoryDiv=document.createElement("div");
     // 為新div設定class
     cardDiv.classList.add("card");
+    cardDiv.setAttribute("onclick", "location.href='/attraction/"+data.data[whileNumber].id+"'");
     photoDiv.classList.add("photo");
     imgDiv.classList.add("img");
     nameDiv.classList.add("name");            
@@ -424,10 +434,10 @@ function moreData(){
             // 判斷是否有下一頁
             if(data.nextPage==null){
                 if(page!="已無更多資料"){
-                    var n=0;
-                    while (n<data.data.length){
-                        createCard();
-                        n+=1;
+                    var whileNumber=0;
+                    while (whileNumber<data.data.length){
+                        createCard(data,whileNumber);
+                        whileNumber+=1;
                     }
                     page="已無更多資料" ;
                 }else{
@@ -468,7 +478,8 @@ function moreData(){
                 };
             };
             rect=footer.getBoundingClientRect();
-        };       
+        };  
+        scrolled=false      
     };
     req.send();
 };
