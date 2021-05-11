@@ -359,7 +359,15 @@ footer{
 .mymouse{
     cursor: pointer;
 }
-
+#windowBackground{
+    width: 100vw;
+    background-color: black;
+    opacity: 0.25;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    margin: 0px 0px 0px 0px ;
+}
 
 
 
@@ -445,7 +453,10 @@ footer{
 
 </style>
 <header>
+    <div id="windowBackground" class="display">
+    </div>
     <div id="head">
+
         <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
         <div id="headRight">
             <a class="mymouse">預定行程</a>
@@ -607,6 +618,8 @@ footer{
     function signinWindow(){
         let signIn=document.getElementById("signIn");
         let signUp=document.getElementById("signUp");
+        var windowBackground=document.getElementById("windowBackground")
+        windowBackground.classList.remove("display");
         signUp.classList.add("display");
         signIn.classList.remove("display");
         // 隱藏錯誤訊息
@@ -617,6 +630,7 @@ footer{
     function signupWindow(){
         let signIn=document.getElementById("signIn");
         let signUp=document.getElementById("signUp");
+        windowBackground.classList.remove("display");
         signUp.classList.remove("display");
         signIn.classList.add("display");
         // 隱藏錯誤訊息
@@ -627,6 +641,7 @@ footer{
     function closeWindow(){
         let signIn=document.getElementById("signIn");
         let signUp=document.getElementById("signUp");
+        windowBackground.classList.add("display");
         signUp.classList.add("display");
         signIn.classList.add("display");
         // 隱藏錯誤訊息

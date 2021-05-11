@@ -89,6 +89,8 @@ def user():
 					return{"error":True,"message":"重複的email"}
 			else:
 				return{"error":True,"message":"資料有缺無法註冊"}
+		else:
+			return{"error":True,"message":"伺服器發生錯誤"}
 	except:	
 		{"error": True,"message": "伺服器發生錯誤"}
 
@@ -259,5 +261,5 @@ def attractionId(attractionId):
 		return {"error": True,"message": "伺服器發生錯誤"}
 
 
-# app.run(port=3000)
-app.run(host="0.0.0.0",port=3000)
+app.run(port=3000)
+# app.run(host="0.0.0.0",port=3000)
