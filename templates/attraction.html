@@ -77,6 +77,7 @@ body{
     align-items: center;
     background-repeat: no-repeat;
     background-size: 100%;
+    position: relative;
 }
 #leftImg{
     background: url(/static/btn_leftArrow.png);
@@ -89,6 +90,30 @@ body{
     width: 36px;
     height: 36px;
     margin-right: 10px;
+}
+#imgCenter{
+    height: 30px;
+    position: relative ;
+    bottom: -188px;
+    display: flex;
+    justify-content:space-around ;
+    align-items: center;
+
+}
+.imgChoice{
+    background-color: white;
+    width: 12px;
+    height: 12px;
+    border-radius: 18px;
+    margin: 0px 6px 13px 6px;
+    opacity:90%
+    /* margin-left:  6px;
+    margin-right: 6px; */
+}
+#nowImg{
+    border: 1px #ffffff solid;
+    background-color: #000000;
+    opacity:90%
 }
 #heroRight{
     margin-top: 0px;
@@ -233,7 +258,166 @@ hr{
     font-weight: 700;
     margin-top: 20px;
 }
+#signIn{
+    /* display: none; */
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 275px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signinHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signinImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signinTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
 
+}
+.signinInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signinButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signinButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signinFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+#signUp{
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 332px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signupHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signupImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signupTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signupInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signupButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signupButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signupFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+.errorText{
+    margin: 0px 15px 10px 15px;
+    height: 22px;
+    width: 310px;
+    color: brown;
+    text-align: center;
+}
 
 footer{
     background: #757575;
@@ -250,6 +434,12 @@ footer{
     line-height: 13px;
     color: #FFFFFF;
 } 
+.display{
+    display: none;
+}
+.mymouse{
+    cursor: pointer;
+}
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
     #head{
@@ -271,6 +461,9 @@ footer{
         background-size: auto 350px;
         margin: 74px auto 0px auto;
         background-position: center center;
+    }
+    #imgCenter{
+        bottom: -160px;
     }
     #heroRight{
         margin: 0px auto 30px auto;
@@ -335,6 +528,9 @@ footer{
         margin: 0px auto;
         background-position: center center;
     }
+    #imgCenter{
+        bottom: -160px;
+    }
     #heroRight{
         margin-top: 0px;
         width: 340px;
@@ -388,19 +584,50 @@ footer{
 </style>
 <header>
     <div id="head">
-        <div id="headLeft" onclick="location.href='/'"><a >台北一日遊</a></div>
+        <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
         <div id="headRight">
-            <a>預定行程</a>
-            <a>登入/註冊</a>
+            <a class="mymouse">預定行程</a>
+            <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
+            <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
         </div>
         
     </div>  
 </header>
-<body>
+<div id="signIn" class="display">
+    <div id="signinHead"></div>
+    <div id="signinImg" onclick="closeWindow()"></div>
+    <div id="signinTitle">登入會員帳號 </div>
+    <input class="signinInput" type="email" id="signinEmail" placeholder="輸入電子信箱">
+    <input class="signinInput" type="password" id="signinPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signinError" >帳號或密碼輸入錯誤</div>
+    <div id="signinButton" onclick="signIn()" class="mymouse">
+        <div id="signinButtonText" >登入帳戶</div>
+    </div>
+    <div id="signinFoot" onclick="signupWindow()">還沒有帳戶？點此註冊</div>   
+</div>
+
+<div id="signUp" class="display">
+    <div id="signupHead"></div>
+    <div id="signupImg" onclick="closeWindow()"></div>
+    <div id="signupTitle">註冊會員帳號 </div>
+    <input class="signupInput" id="signupName" placeholder="輸入姓名">
+    <input class="signupInput" type="email" id="signupEmail" placeholder="輸入電子信箱">
+    <input class="signupInput" type="password" id="signupPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signupemailError" >此電子信箱已被註冊</div>
+    <div class="errorText display" id="signupspaceError" >欄位為空白或含非法字元</div>
+    <div id="signupButton" onclick="signUp()" class="mymouse">
+        <div id="signupButtonText" >註冊新帳戶</div>
+    </div>
+    <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
+</div>
+
+<body onload="checkMember()">
     <div id="hero">
         <div id="img">
-            <div id="leftImg"  onclick="leftImg()"></div>
-            <div id="rightImg" onclick="rightImg()"></div>
+            <div id="leftImg"  onclick="leftImg()" class="mymouse"></div>
+            <div id="imgCenter">
+            </div>
+            <div id="rightImg" onclick="rightImg()" class="mymouse"></div>
         </div>
         <div id="heroRight">
             <div id="name"></div>
@@ -408,15 +635,15 @@ footer{
             <div id="heroRightbox">
                 <div class="title" id="rightTitle">訂購導覽行程</div>
                 <div id="rightIntro">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-                <div class="title" id="date">選擇日期：<input type="date"></div>
+                <div class="title " id="date" >選擇日期：<input type="date" ></div>
                 <div class="title" id="time" >選擇時間：
-                    <div class="day" onclick="changeLeftTime()">
+                    <div class="day mymouse" onclick="changeLeftTime()">
                         <div class="timeCheck" id="leftTimeCheck" >
                             <div  class="changeTime" id="changeLeftTime"></div>
                         </div>
                         <div>上半天</div>
                     </div>
-                    <div class="day" onclick="changeRightTime()">
+                    <div class="day mymouse" onclick="changeRightTime()">
                         <div class="timeCheck" id="rightTimeCheck" >
                             <div  id="changeRightTime"></div>
                         </div>
@@ -424,7 +651,7 @@ footer{
                     </div>
                 </div>
                 <div class="title" id="money">導覽費用： <div id="moneyContent">新台幣2000元</div></div>
-                <div id="button">開始預訂行程</div>
+                <div id="button" class="mymouse">開始預訂行程</div>
             </div>
         </div>
     </div>
@@ -444,6 +671,138 @@ footer{
 </footer>
 </html>
 <script type="text/javascript">
+    //確認使用者登入狀態 
+    function checkMember(){
+        var reqMember=new XMLHttpRequest();
+        reqMember.open("get","/api/user")
+        reqMember.onload=function(){
+            let getdata=JSON.parse(this.responseText);
+            let headsignin=document.getElementById("headsignin")
+            let headsignout=document.getElementById("headsignout")
+            if(getdata["data"]!=null){
+                headsignin.classList.add("display")
+                headsignout.classList.remove("display")
+            }else{
+                headsignin.classList.remove("display")
+                headsignout.classList.add("display")
+            }
+        }
+        reqMember.send()
+    }
+
+    //登出
+    function signOut(){
+        let reqsignOut=new XMLHttpRequest()
+        reqsignOut.open("delete","/api/user")
+        reqsignOut.onload=function(){
+            window.location.reload()
+            headsignin.classList.remove("display")
+            headsignout.classList.add("display")
+            
+        }
+        reqsignOut.send()
+    }
+    
+    // 登入
+    function signIn(){
+        let signineMail=document.getElementById("signinEmail").value
+        let signinPassword=document.getElementById("signinPassword").value
+        var signinError=document.getElementById("signinError")
+        if(signineMail==""|signinPassword==""){
+            signinError.classList.remove("display")
+        }else{
+            let reqsignIn=new XMLHttpRequest()
+            reqsignIn.open("patch","/api/user")
+            reqsignIn.onload=function(){
+                signindata=JSON.parse(this.responseText);
+                // console.log(data)
+                if (signindata["ok"]==true){
+                    window.location.reload()
+                }else{
+                    signinError.classList.remove("display")
+                }
+                
+            }
+            reqsignIn.send(JSON.stringify({"email":signineMail,"password":signinPassword}))
+        }
+    }
+    
+    //註冊
+    function signUp(){
+        let signupName=document.getElementById("signupName").value
+        let signupMail=document.getElementById("signupEmail").value
+        let signupPassword=document.getElementById("signupPassword").value
+        var signupemailError=document.getElementById("signupemailError")
+        var signupspaceError=document.getElementById("signupspaceError")
+        // 判斷input是否空白
+        if(signupName==""| signupMail==""| signupPassword==""){
+            signupspaceError.classList.remove("display")
+        }else{
+            // 連接註冊API
+            let reqsignUp=new XMLHttpRequest();
+            reqsignUp.open("post","/api/user")
+            reqsignUp.onload=function(){
+                signupdata=JSON.parse(this.responseText);
+                if(signupdata["ok"]==true){
+                    //註冊成功則自動登入
+                    let reqsignIn=new XMLHttpRequest()
+                    reqsignIn.open("patch","/api/user")
+                    reqsignIn.onload=function(){
+                        signindata=JSON.parse(this.responseText);
+                        // console.log(data)
+                        if (signindata["ok"]==true){
+                            window.location.reload()
+                        }else{
+                            var signinError=document.getElementById("signinError")
+                            signinError.classList.remove("display")
+                        }
+                        
+                    }
+                    reqsignIn.send(JSON.stringify({"email":signupMail,"password":signupPassword}))
+                }else{
+                    // 註冊失敗顯示原因
+                    signupspaceError.classList.add("display")
+                    signupemailError.classList.remove("display")
+                }
+            }
+            reqsignUp.send(JSON.stringify({"name":signupName,"email":signupMail,"password":signupPassword}))
+
+        }
+        
+
+    }
+
+    // 註冊、登入視窗
+    function signinWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        signUp.classList.add("display");
+        signIn.classList.remove("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function signupWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        signUp.classList.remove("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function closeWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        signUp.classList.add("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    
     //選擇時間
     function changeLeftTime(){
         var changeLeftTime=document.getElementById("changeLeftTime")
@@ -465,24 +824,42 @@ footer{
     }
     // 切換圖片
     function leftImg(){
+        var totalImg=document.getElementsByClassName("imgChoice");
         if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
             imgNumber=data.data.images.length-1;
             img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
+            totalImg[0].removeAttribute("id","nowImg");
+            totalImg[imgNumber].setAttribute("id","nowImg");
         }else{
             imgNumber-=1;
-            img.style.backgroundImage="url("+data.data.images[imgNumber]+")";           
+            img.style.backgroundImage="url("+data.data.images[imgNumber]+")";    
+            totalImg[imgNumber+1].removeAttribute("id","nowImg");
+            totalImg[imgNumber].setAttribute("id","nowImg");       
         };
     };
     function rightImg(){
+        var totalImg=document.getElementsByClassName("imgChoice");
         if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
-            imgNumber=1;
-            img.style.backgroundImage="url("+data.data.images[1]+")";
+            // 判斷圖片不只1張
+            if(data.data.images.length>1){
+                imgNumber=1;
+                img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
+                totalImg[0].removeAttribute("id","nowImg");
+                totalImg[imgNumber].setAttribute("id","nowImg");
+            };
         }else{
             imgNumber+=1;
             if(data.data.images[imgNumber]==null){
                 img.style.backgroundImage="url("+data.data.images[0]+")";
+                totalImg[imgNumber-1].removeAttribute("id","nowImg");
+                totalImg[0].setAttribute("id","nowImg");
+
             }else{
                 img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
+                totalImg[imgNumber-1].removeAttribute("id","nowImg");
+                totalImg[imgNumber].setAttribute("id","nowImg");
+                
+
             };
         };
     };
@@ -499,6 +876,7 @@ footer{
         var category=document.getElementById("category");
         var img=document.getElementById("img");
         // 創造api文字
+        console.log(data)
         var Name = document.createTextNode(data.data.name);
         var Description = document.createTextNode(data.data.description);
         var Address = document.createTextNode(data.data.address);
@@ -515,6 +893,7 @@ footer{
             var Content = document.createTextNode(content);
             category.appendChild(Content);
         };
+        imgAmount()
         // 填入api文字、圖片
         name.appendChild(Name);
         description.appendChild(Description);
@@ -531,5 +910,25 @@ footer{
     }   
     }
     req.send();
-
+    function clickImg(){
+        var img=document.getElementsByClassName("imgChoice")
+        var index=[].indexOf.call(img[0].parentElement.children,img[0])
+        var img=this
+        console.log(index)
+    }
+    function imgAmount(){
+        imgNumber=data.data.images.length;
+        var whileNumber=0
+        while(whileNumber<imgNumber){
+            var newDiv=document.createElement("div");
+            var imgCenter=document.getElementById("imgCenter");
+            newDiv.classList.add("imgChoice");
+            newDiv.setAttribute("onClick","clickImg()")
+            imgCenter.appendChild(newDiv);
+            whileNumber+=1;
+        };
+        var totalImg=document.getElementsByClassName("imgChoice");
+        totalImg[0].setAttribute("id","nowImg");
+    };
+    
 </script>
