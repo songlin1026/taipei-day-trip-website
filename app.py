@@ -18,6 +18,7 @@ cursor=connection.cursor()
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # Pages
 @app.route("/")
@@ -34,6 +35,67 @@ def thankyou():
 	return render_template("thankyou.html")
 
 ######
+@app.route("/api/user",methods=["GET","POST","PATCH","DELETE"])
+def user():
+	try:
+	# 登入
+		if request.method=="PATCH":
+			signin_Data=json.loads(request.data.decode('utf-8'))
+			signinEmail=signin_Data["email"]
+			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
+			signinData=cursor.fetchone()
+			if signinData!=None:
+				if signinData[3]==signin_Data["password"]:
+					session["member"]=signinData[1]
+					return {"ok":True}
+				else:
+					return {"error":True,"message":"信箱或密碼錯誤"}
+			else:
+				return {"error":True,"message":"信箱或密碼錯誤"}
+		# 檢查是否登入
+		elif request.method=="GET":
+			if session.get("member")!="":
+				memberName=session.get("member")
+				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
+				memberData=cursor.fetchone()
+				if memberData!=None:
+					return {"data":{"id":memberData[0],"name":memberData[1],"email":memberData[2]}}
+				else:
+					session["member"]=""
+					return {"data":None}
+					
+			else:
+				session["member"]=""
+				return {"data":None}
+				
+		# 登出
+		elif request.method=="DELETE":
+			session["member"]=""
+			return {"ok":True}
+		# 註冊
+		elif request.method=="POST":
+			signupData=json.loads(request.data.decode('utf-8'))
+			signupEmail=signupData["email"]
+			signupName=signupData["name"]
+			signupPassword=signupData["password"]
+			if signupEmail!=None or signupName!=None or signupPassword!=None:
+				cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
+				signup_member=cursor.fetchone()
+				if signup_member==None:
+					cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
+					connection.commit()
+					return {"ok":True}
+				else:
+					return{"error":True,"message":"重複的email"}
+			else:
+				return{"error":True,"message":"資料有缺無法註冊"}
+		else:
+			return{"error":True,"message":"伺服器發生錯誤"}
+	except:	
+		{"error": True,"message": "伺服器發生錯誤"}
+
+	
+
 
 @app.route("/api/attractions")
 def attractions():

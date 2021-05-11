@@ -186,6 +186,191 @@ footer{
     line-height: 13px;
     color: #FFFFFF;
 } 
+#mouse{
+    cursor: pointer;
+    opacity: 80%
+}
+.display{
+        display: none;
+    }
+#signIn{
+    /* display: none; */
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 275px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signinHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signinImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signinTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signinInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signinButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signinButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signinFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+#signUp{
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 332px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signupHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signupImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signupTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signupInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signupButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signupButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signupFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+.errorText{
+    margin: 0px 15px 10px 15px;
+    height: 22px;
+    width: 310px;
+    color: brown;
+    text-align: center;
+}
+.display{
+    display: none;
+}
+.mymouse{
+    cursor: pointer;
+}
+#windowBackground{
+    width: 100vw;
+    background-color: black;
+    opacity: 0.25;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    margin: 0px 0px 0px 0px ;
+}
+
+
+
 @media screen and (min-width: 600px) and (max-width: 1200px) {
     #head{
         padding:  0px 5%;
@@ -263,81 +448,229 @@ footer{
         padding-bottom: 13px;
         height: 20px;
     }
+
 }
 
 </style>
 <header>
+    <div id="windowBackground" class="display">
+    </div>
     <div id="head">
-        <div id="headLeft"><a>台北一日遊</a></div>
+
+        <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
         <div id="headRight">
-            <a>預定行程</a>
-            <a>登入/註冊</a>
+            <a class="mymouse">預定行程</a>
+            <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
+            <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
         </div>
         
     </div>  
 </header>
+<div id="signIn" class="display">
+    <div id="signinHead"></div>
+    <div id="signinImg" onclick="closeWindow()"></div>
+    <div id="signinTitle">登入會員帳號 </div>
+    <input class="signinInput" type="email" id="signinEmail" placeholder="輸入電子信箱">
+    <input class="signinInput" type="password" id="signinPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signinError" >帳號或密碼輸入錯誤</div>
+    <div id="signinButton" onclick="signIn()" class="mymouse">
+        <div id="signinButtonText" >登入帳戶</div>
+    </div>
+    <div id="signinFoot" onclick="signupWindow()">還沒有帳戶？點此註冊</div>   
+</div>
+
+<div id="signUp" class="display">
+    <div id="signupHead"></div>
+    <div id="signupImg" onclick="closeWindow()"></div>
+    <div id="signupTitle">註冊會員帳號 </div>
+    <input class="signupInput" id="signupName" placeholder="輸入姓名">
+    <input class="signupInput" type="email" id="signupEmail" placeholder="輸入電子信箱">
+    <input class="signupInput" type="password" id="signupPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signupemailError" >此電子信箱已被註冊</div>
+    <div class="errorText display" id="signupspaceError" >欄位為空白或含非法字元</div>
+    <div id="signupButton" onclick="signUp()" class="mymouse">
+        <div id="signupButtonText" >註冊新帳戶</div>
+    </div>
+    <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
+</div>
+
 <body onload="getData()">
-    <div id=heroSection >
+    <div id=heroSection  >
         <div id="hero">
             <div id="heroOne" >輕鬆享受台北一日悠閒</div>
             <div id="heroTwo" >探索每個角落，體驗城市的深度旅遊行程</div>
             <div  id="searchPar">
                 <input type="text" id="searchInput" placeholder="輸入景點名稱查詢"></input>
-                <div id="searchImg" onclick="searchData()"><img></div>
+                <div id="searchImg" onclick="searchData()" class="mymouse"><img></div>
             </div>
         </div>  
     </div>
     <div class="content" id="content">
     </div>
 </body>
-<footer>
-    <div id="foot">
+<footer >
+    <div id="foot" >
         COPYRIGHT © 2021 台北一日遊   
     </div>
 </footer>
 </html>
 <script type="text/javascript">
+    //確認使用者登入狀態 
+    var reqMember=new XMLHttpRequest();
+    reqMember.open("get","/api/user")
+    reqMember.onload=function(){
+        let getdata=JSON.parse(this.responseText);
+        let headsignin=document.getElementById("headsignin")
+        let headsignout=document.getElementById("headsignout")
+        if(getdata["data"]!=null){
+            headsignin.classList.add("display")
+            headsignout.classList.remove("display")
+        }else{
+            headsignin.classList.remove("display")
+            headsignout.classList.add("display")
+        }
+    }
+    reqMember.send()
 
-//節流function
-var throttle = function (fn, wait) { 
-    let timer, 
-        firstTime = true;
-        //判斷是不是第一次調用，第一次不需要延遲 
-        return function () { 
-            if (firstTime) { 
-                fn.apply(this, arguments); 
-                firstTime = false; 
-            }if (timer) { 
-                return false; 
-            } 
-            timer = setTimeout(() => { 
-                clearTimeout(timer); 
-                timer = null; //將timer進行初始化， 
-                fn.apply(this, arguments);
-            }, wait) ;
-        } ;
-    };
-
-var footer=document.querySelector("footer");
-function hello(){
-    // 計算footer距離
+    //登出
+    function signOut(){
+        let reqsignOut=new XMLHttpRequest()
+        reqsignOut.open("delete","/api/user")
+        reqsignOut.onload=function(){
+            window.location.reload()
+            headsignin.classList.remove("display")
+            headsignout.classList.add("display")
+            
+        }
+        reqsignOut.send()
+    }
     
-    scrolled=false
+    // 登入
+    function signIn(){
+        let signineMail=document.getElementById("signinEmail").value
+        let signinPassword=document.getElementById("signinPassword").value
+        var signinError=document.getElementById("signinError")
+        if(signineMail==""|signinPassword==""){
+            signinError.classList.remove("display")
+        }else{
+            let reqsignIn=new XMLHttpRequest()
+            reqsignIn.open("patch","/api/user")
+            reqsignIn.onload=function(){
+                signindata=JSON.parse(this.responseText);
+                // console.log(data)
+                if (signindata["ok"]==true){
+                    window.location.reload()
+                }else{
+                    signinError.classList.remove("display")
+                }
+                
+            }
+            reqsignIn.send(JSON.stringify({"email":signineMail,"password":signinPassword}))
+        }
+    }
+    
+    //註冊
+    function signUp(){
+        let signupName=document.getElementById("signupName").value
+        let signupMail=document.getElementById("signupEmail").value
+        let signupPassword=document.getElementById("signupPassword").value
+        var signupemailError=document.getElementById("signupemailError")
+        var signupspaceError=document.getElementById("signupspaceError")
+        // 判斷input是否空白
+        if(signupName==""| signupMail==""| signupPassword==""){
+            signupspaceError.classList.remove("display")
+        }else{
+            // 連接註冊API
+            let reqsignUp=new XMLHttpRequest();
+            reqsignUp.open("post","/api/user")
+            reqsignUp.onload=function(){
+                signupdata=JSON.parse(this.responseText);
+                if(signupdata["ok"]==true){
+                    //註冊成功則自動登入
+                    let reqsignIn=new XMLHttpRequest()
+                    reqsignIn.open("patch","/api/user")
+                    reqsignIn.onload=function(){
+                        signindata=JSON.parse(this.responseText);
+                        // console.log(data)
+                        if (signindata["ok"]==true){
+                            window.location.reload()
+                        }else{
+                            var signinError=document.getElementById("signinError")
+                            signinError.classList.remove("display")
+                        }
+                        
+                    }
+                    reqsignIn.send(JSON.stringify({"email":signupMail,"password":signupPassword}))
+                }else{
+                    // 註冊失敗顯示原因
+                    signupspaceError.classList.add("display")
+                    signupemailError.classList.remove("display")
+                }
+            }
+            reqsignUp.send(JSON.stringify({"name":signupName,"email":signupMail,"password":signupPassword}))
+
+        }
+        
+
+    }
+
+    // 註冊、登入視窗
+    function signinWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        var windowBackground=document.getElementById("windowBackground")
+        windowBackground.classList.remove("display");
+        signUp.classList.add("display");
+        signIn.classList.remove("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function signupWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        windowBackground.classList.remove("display");
+        signUp.classList.remove("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function closeWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        windowBackground.classList.add("display");
+        signUp.classList.add("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    
+
+
+
+
+scrolled=false
+// 監測footer距離
+var footer=document.querySelector("footer");
+// 自動載入更多資料
+function infiniteScroll(){
+    // 計算footer距離
     rect=footer.getBoundingClientRect();
     // 判斷是否到達底部、是否還有更多資料
-    if (scrolled==false){
-        scrolled=true
-        if(rect.top < 1000){
-            if(page!="已無更多資料"){   
-                window.removeEventListener("scroll",hello) ;   
-                moreData();
-                // window.moveTo(2000,2000);
-                                   
-                };        
-            };
-    };
+    if(rect.top < 3000){
+        if(page!="已無更多資料"){   
+            moreData();                                 
+            };        
+        };
 };
-window.addEventListener("scroll",throttle(hello,200));
+// 監測滾動事件
+window.addEventListener("scroll",infiniteScroll);
+
+
 
 
 function createCard(data,whileNumber){
@@ -353,13 +686,16 @@ function createCard(data,whileNumber){
     var categoryDiv=document.createElement("div");
     // 為新div設定class
     cardDiv.classList.add("card");
-    cardDiv.setAttribute("onclick", "location.href='/attraction/"+data.data[whileNumber].id+"'");
     photoDiv.classList.add("photo");
     imgDiv.classList.add("img");
     nameDiv.classList.add("name");            
     describeImg.classList.add("describe");
     mrtDiv.classList.add("mrt");
     categoryDiv.classList.add("category");
+    // 設定超連結，滑鼠效果
+    cardDiv.setAttribute("onclick", "location.href='/attraction/"+data.data[whileNumber].id+"'");
+    cardDiv.setAttribute("onMouseOver","this.setAttribute('id','mouse')")
+    cardDiv.setAttribute("onMouseOut","this.removeAttribute('id','mouse')")
     //抓取api資料
     var Name = document.createTextNode(data.data[whileNumber].name);
     var Category = document.createTextNode(data.data[whileNumber].category); 
@@ -399,18 +735,12 @@ function getData(){
         var data=JSON.parse(this.responseText);
         // 判斷是否還有下頁資料
         if(data.nextPage==null){
-            // 判斷最後一頁資料是否已印出
-            if(page!="已無更多資料"){
                 // 印出最後一頁資料
                 var whileNumber=0;
-                while (n<data.data.length){
+                while (whileNumber<data.data.length){
                     createCard(data,whileNumber);
                     whileNumber+=1;
                 };
-                page="已無更多資料" ;
-            }else{
-                // alert("已無更多資料")
-            };
         }else{
             // 印出本頁資料
             var whileNumber=0;
@@ -424,64 +754,57 @@ function getData(){
     req.send();
 };
 function moreData(){
-    var req=new XMLHttpRequest();
-    var searchInput=document.getElementById("searchInput");
-    // 判斷使用者是否使用搜尋
-    if(searchInput.value==""){
-        req.open("get","/api/attractions?page="+page);
-        req.onload=function(){
-            var data=JSON.parse(this.responseText);
-            // 判斷是否有下一頁
-            if(data.nextPage==null){
-                if(page!="已無更多資料"){
+    if(scrolled==false){
+        scrolled=true
+        var req=new XMLHttpRequest();
+        var searchInput=document.getElementById("searchInput");
+        // 判斷使用者是否使用搜尋
+        if(searchInput.value==""){
+            req.open("get","/api/attractions?page="+page);
+            req.onload=function(){
+                var data=JSON.parse(this.responseText);
+                // 判斷是否有下一頁
+                if(data.nextPage==null){
                     var whileNumber=0;
                     while (whileNumber<data.data.length){
                         createCard(data,whileNumber);
                         whileNumber+=1;
                     }
-                    page="已無更多資料" ;
                 }else{
-                    // alert("已無更多資料")
-                };
-            }else{
-                page=data.nextPage;
-                var whileNumber=0;
-                while (whileNumber<12){
-                    createCard(data,whileNumber);
-                    whileNumber+=1;
+                    page=data.nextPage;
+                    var whileNumber=0;
+                    while (whileNumber<12){
+                        createCard(data,whileNumber);
+                        whileNumber+=1;
+                    };
+                    scrolled=false 
                 };
             };
-        };
-    }else{
-        // 搜尋關鍵字
-        req.open("get","/api/attractions?page="+page+"&keyword="+searchInput.value);
-        req.onload=function(){
-            var data=JSON.parse(this.responseText);
-            // 判斷是否還有下一頁
-            if(data.nextPage==null){
-                if(page!="已無更多資料"){
+        }else{
+            // 搜尋關鍵字
+            req.open("get","/api/attractions?page="+page+"&keyword="+searchInput.value);
+            req.onload=function(){
+                var data=JSON.parse(this.responseText);
+                // 判斷是否還有下一頁
+                if(data.nextPage==null){
                     var whileNumber=0;
                     while (whileNumber<data.data.length){
                         createCard(data,whileNumber);
                         whileNumber+=1;
                     };
-                    page="已無更多資料" ;
                 }else{
-                    // alert("已無更多資料");
+                    page=data.nextPage;
+                    var whileNumber=0;
+                    while (whileNumber<12){
+                        createCard(data,whileNumber);
+                        whileNumber+=1;
+                    };
+                    scrolled=false 
                 };
-            }else{
-                page=data.nextPage;
-                var whileNumber=0;
-                while (whileNumber<12){
-                    createCard(data,whileNumber);
-                    whileNumber+=1;
-                };
-            };
-            rect=footer.getBoundingClientRect();
-        };  
-        scrolled=false      
-    };
-    req.send();
+            };          
+        };    
+        req.send();
+    };  
 };
 
 function searchData(){
@@ -506,7 +829,6 @@ function searchData(){
                 createCard(data,whileNumber);
                 whileNumber+=1;
             };
-            page="已無更多資料";
         }else{
             page=data.nextPage;
             var whileNumber=0;
@@ -514,6 +836,7 @@ function searchData(){
                 createCard(data,whileNumber);
                 whileNumber+=1;
             };
+            scrolled=false 
         };
     };
     req.send();
