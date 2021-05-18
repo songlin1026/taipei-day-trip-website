@@ -35,6 +35,53 @@ def thankyou():
 	return render_template("thankyou.html")
 
 ######
+@app.route("/api/booking",methods=["GET","POST","DELETE"])
+def bookingAPI():	
+	if request.method=="POST":
+		# 檢查是否登入
+		if session.get("member")!="":
+			attractionpostData=json.loads(request.data.decode('utf-8'))
+			# 檢查訂購資料是否有誤
+			if attractionpostData["attractionId"] =="" or attractionpostData["date"] ==""  :
+				return {"error":True,"message":"訂購資料有缺誤"}
+			elif attractionpostData["time"] =="" or attractionpostData["price"] =="" :
+				return {"error":True,"message":"訂購資料有缺誤"}
+			else:
+				# 抓取景點資料
+				attractionId=attractionpostData["attractionId"]
+				cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
+				bookingAtt=cursor.fetchone()
+				attractionId=int(bookingAtt[0])
+				attractionName=bookingAtt[1]
+				attractionAddress=bookingAtt[4]
+				attractionImage=eval(bookingAtt[9])[0]
+				bookingDate=attractionpostData["date"]
+				bookingTime=attractionpostData["time"]
+				bookingPrice=int(attractionpostData["price"])
+				# 設定session
+				bookingdic={"attraction":{"id":attractionId,"name":attractionName,"address":attractionAddress,"image":attractionImage},"date":bookingDate,"time":bookingTime,"price":bookingPrice}
+				session["booking"]=bookingdic
+				return {"ok":True}
+		else:
+			return {"error":True,"message":"使用者未登入"}
+	elif request.method=="GET":
+		if session.get("member")=="":
+			return {"error":True,"message":"使用者未登入"}
+		else:
+			if session.get("booking")=="":
+				return {"data":None}
+			else:
+				data=session.get("booking")
+				return {"data":data}
+	elif request.method=="DELETE":
+		session["booking"]=""
+		return {"ok":True}
+	else:
+		return{"error":True}
+
+
+
+
 @app.route("/api/user",methods=["GET","POST","PATCH","DELETE"])
 def user():
 	try:

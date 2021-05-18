@@ -459,7 +459,7 @@ footer{
 
         <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
         <div id="headRight">
-            <a class="mymouse">預定行程</a>
+            <a class="mymouse" onclick="bookingBut()">預定行程</a>
             <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
             <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
         </div>
@@ -468,7 +468,7 @@ footer{
 </header>
 <div id="signIn" class="display">
     <div id="signinHead"></div>
-    <div id="signinImg" onclick="closeWindow()"></div>
+    <div id="signinImg" onclick="closeWindow()" class="mymouse"></div>
     <div id="signinTitle">登入會員帳號 </div>
     <input class="signinInput" type="email" id="signinEmail" placeholder="輸入電子信箱">
     <input class="signinInput" type="password" id="signinPassword" placeholder="輸入密碼">
@@ -481,7 +481,7 @@ footer{
 
 <div id="signUp" class="display">
     <div id="signupHead"></div>
-    <div id="signupImg" onclick="closeWindow()"></div>
+    <div id="signupImg" onclick="closeWindow()" class="mymouse"></div>
     <div id="signupTitle">註冊會員帳號 </div>
     <input class="signupInput" id="signupName" placeholder="輸入姓名">
     <input class="signupInput" type="email" id="signupEmail" placeholder="輸入電子信箱">
@@ -516,7 +516,7 @@ footer{
 </html>
 <script type="text/javascript">
     //確認使用者登入狀態 
-    var reqMember=new XMLHttpRequest();
+    let reqMember=new XMLHttpRequest();
     reqMember.open("get","/api/user")
     reqMember.onload=function(){
         let getdata=JSON.parse(this.responseText);
@@ -549,7 +549,7 @@ footer{
     function signIn(){
         let signineMail=document.getElementById("signinEmail").value
         let signinPassword=document.getElementById("signinPassword").value
-        var signinError=document.getElementById("signinError")
+        let signinError=document.getElementById("signinError")
         if(signineMail==""|signinPassword==""){
             signinError.classList.remove("display")
         }else{
@@ -557,7 +557,6 @@ footer{
             reqsignIn.open("patch","/api/user")
             reqsignIn.onload=function(){
                 signindata=JSON.parse(this.responseText);
-                // console.log(data)
                 if (signindata["ok"]==true){
                     window.location.reload()
                 }else{
@@ -574,8 +573,8 @@ footer{
         let signupName=document.getElementById("signupName").value
         let signupMail=document.getElementById("signupEmail").value
         let signupPassword=document.getElementById("signupPassword").value
-        var signupemailError=document.getElementById("signupemailError")
-        var signupspaceError=document.getElementById("signupspaceError")
+        let signupemailError=document.getElementById("signupemailError")
+        let signupspaceError=document.getElementById("signupspaceError")
         // 判斷input是否空白
         if(signupName==""| signupMail==""| signupPassword==""){
             signupspaceError.classList.remove("display")
@@ -591,11 +590,10 @@ footer{
                     reqsignIn.open("patch","/api/user")
                     reqsignIn.onload=function(){
                         signindata=JSON.parse(this.responseText);
-                        // console.log(data)
                         if (signindata["ok"]==true){
                             window.location.reload()
                         }else{
-                            var signinError=document.getElementById("signinError")
+                            let signinError=document.getElementById("signinError")
                             signinError.classList.remove("display")
                         }
                         
@@ -613,12 +611,21 @@ footer{
         
 
     }
+    // 預定行程按鈕
+    function bookingBut(){
+        let headsignout=document.getElementById("headsignout").className
+        if (headsignout=="mymouse"){
+            window.location.href="/booking"
+        }else{
+            signinWindow()
+        }
+    }
 
     // 註冊、登入視窗
     function signinWindow(){
         let signIn=document.getElementById("signIn");
         let signUp=document.getElementById("signUp");
-        var windowBackground=document.getElementById("windowBackground")
+        let windowBackground=document.getElementById("windowBackground")
         windowBackground.classList.remove("display");
         signUp.classList.add("display");
         signIn.classList.remove("display");
@@ -655,7 +662,7 @@ footer{
 
 scrolled=false
 // 監測footer距離
-var footer=document.querySelector("footer");
+let footer=document.querySelector("footer");
 // 自動載入更多資料
 function infiniteScroll(){
     // 計算footer距離
@@ -675,15 +682,15 @@ window.addEventListener("scroll",infiniteScroll);
 
 function createCard(data,whileNumber){
     // 創card中所有div
-    var content=document.getElementById("content");
-    var cardDiv=document.createElement("div");
-    var photoDiv=document.createElement("div");
-    var imgDiv=document.createElement("div");
-    var nameDiv=document.createElement("div");
-    var img = document.createElement("img");
-    var describeImg=document.createElement("div");
-    var mrtDiv=document.createElement("div");
-    var categoryDiv=document.createElement("div");
+    let content=document.getElementById("content");
+    let cardDiv=document.createElement("div");
+    let photoDiv=document.createElement("div");
+    let imgDiv=document.createElement("div");
+    let nameDiv=document.createElement("div");
+    let img = document.createElement("img");
+    let describeImg=document.createElement("div");
+    let mrtDiv=document.createElement("div");
+    let categoryDiv=document.createElement("div");
     // 為新div設定class
     cardDiv.classList.add("card");
     photoDiv.classList.add("photo");
@@ -697,8 +704,8 @@ function createCard(data,whileNumber){
     cardDiv.setAttribute("onMouseOver","this.setAttribute('id','mouse')")
     cardDiv.setAttribute("onMouseOut","this.removeAttribute('id','mouse')")
     //抓取api資料
-    var Name = document.createTextNode(data.data[whileNumber].name);
-    var Category = document.createTextNode(data.data[whileNumber].category); 
+    let Name = document.createTextNode(data.data[whileNumber].name);
+    let Category = document.createTextNode(data.data[whileNumber].category); 
     // 判斷MRT是否為null
     if(data.data[whileNumber].mrt==null){
         var Mrt= document.createTextNode("無法搭乘捷運到達");
@@ -729,21 +736,21 @@ function getData(){
     // 定位footer距離、移動視窗至最上方
     rect=footer.getBoundingClientRect();
     window.moveTo(0,0);
-    var req=new XMLHttpRequest();
+    let req=new XMLHttpRequest();
     req.open("get","/api/attractions");
     req.onload=function(){
-        var data=JSON.parse(this.responseText);
+        let data=JSON.parse(this.responseText);
         // 判斷是否還有下頁資料
         if(data.nextPage==null){
                 // 印出最後一頁資料
-                var whileNumber=0;
+                let whileNumber=0;
                 while (whileNumber<data.data.length){
                     createCard(data,whileNumber);
                     whileNumber+=1;
                 };
         }else{
             // 印出本頁資料
-            var whileNumber=0;
+            let whileNumber=0;
             while (whileNumber<12){
                 createCard(data,whileNumber);
                 whileNumber+=1;
@@ -756,16 +763,16 @@ function getData(){
 function moreData(){
     if(scrolled==false){
         scrolled=true
-        var req=new XMLHttpRequest();
-        var searchInput=document.getElementById("searchInput");
+        let req=new XMLHttpRequest();
+        let searchInput=document.getElementById("searchInput");
         // 判斷使用者是否使用搜尋
         if(searchInput.value==""){
             req.open("get","/api/attractions?page="+page);
             req.onload=function(){
-                var data=JSON.parse(this.responseText);
+                let data=JSON.parse(this.responseText);
                 // 判斷是否有下一頁
                 if(data.nextPage==null){
-                    var whileNumber=0;
+                    let whileNumber=0;
                     while (whileNumber<data.data.length){
                         createCard(data,whileNumber);
                         whileNumber+=1;
@@ -784,17 +791,17 @@ function moreData(){
             // 搜尋關鍵字
             req.open("get","/api/attractions?page="+page+"&keyword="+searchInput.value);
             req.onload=function(){
-                var data=JSON.parse(this.responseText);
+                let data=JSON.parse(this.responseText);
                 // 判斷是否還有下一頁
                 if(data.nextPage==null){
-                    var whileNumber=0;
+                    let whileNumber=0;
                     while (whileNumber<data.data.length){
                         createCard(data,whileNumber);
                         whileNumber+=1;
                     };
                 }else{
                     page=data.nextPage;
-                    var whileNumber=0;
+                    let whileNumber=0;
                     while (whileNumber<12){
                         createCard(data,whileNumber);
                         whileNumber+=1;
@@ -809,29 +816,29 @@ function moreData(){
 
 function searchData(){
     //刪除原有元素、設定page為0
-    var content=document.getElementById("content");
-    var card = document.getElementsByClassName("card");
-    var carLength=card.length;
+    let content=document.getElementById("content");
+    let card = document.getElementsByClassName("card");
+    let carLength=card.length;
     for(i=0;i<carLength;i++){
         content.removeChild(card[0]);
     };
     page=0;
     //抓取關鍵字
-    var searchInput=document.getElementById("searchInput").value;
-    var req=new XMLHttpRequest();
+    let searchInput=document.getElementById("searchInput").value;
+    let req=new XMLHttpRequest();
     req.open("get","/api/attractions?page="+page+"&keyword="+searchInput);
     req.onload=function(){
-        var data=JSON.parse(this.responseText);
+        let data=JSON.parse(this.responseText);
         //判斷是否還有下一頁資料
         if(data.nextPage==null){
-            var whileNumber=0;
+        let whileNumber=0;
             while (whileNumber<data.data.length){
                 createCard(data,whileNumber);
                 whileNumber+=1;
             };
         }else{
             page=data.nextPage;
-            var whileNumber=0;
+            let whileNumber=0;
             while (whileNumber<12){
                 createCard(data,whileNumber);
                 whileNumber+=1;

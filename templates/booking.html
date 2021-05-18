@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <title>台北一日遊</title>
+</head>
+<style type="text/css">
+header{
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 54px;
+    left: 0px;
+    top: 0px;
+    border-bottom: 1px solid gainsboro;
+
+
+}
+#head{
+    max-width: 1200px;
+    height: 54px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+#headLeft{
+    color: #448899;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 34px;
+}
+#headRight{
+    color: #666666;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+}
+#headRight>a{
+    margin: 0px 10px;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    font-family: 'Noto Sans TC', sans-serif;
+    align-items: center;
+
+}
+#top{
+    margin-top: 54px;
+    width: 1100px;
+    position: relative;
+    padding-left: 100px;
+}
+#topTitle{
+    margin-top: 46px;
+    margin-bottom: 35px;
+    display: flex;
+}
+
+#delete{
+    background: url(/static/icon_delete.png);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 97px;
+    right: 110px;
+}
+.bigTitle{
+    /* margin-top: 46px; */
+    color: #666666;
+    font-size: 19px;
+    font-weight: 700;
+}
+#hero{
+    display: flex;
+    margin-left: 2px;
+    color: #666666;
+    font-weight: 400;
+    font-size: 16px;
+}
+.heroRight{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#bookingImg{
+    /* margin-top: 35px; */
+    width: 266px;
+    height: 200px;
+    margin-right: 22px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+
+}
+#name{
+    font-size: 16px;
+    color: #448899;
+    font-weight: 700;
+    /* width: 144px; */
+    height: 14px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+/* #nameTitle{
+    margin-right: 5px;
+} */
+.herorightTitle{
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 14px;
+    color: #666666;
+}
+.herorightContent{
+    font-size: 16px;
+    font-weight: 400;
+    height: 14px;
+    color: #666666;
+
+}
+.middle{
+    width: 1090px;
+    padding-left: 110px;
+    /* display: flex; */
+}
+.middleContent{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.middleTitle{
+    width: 81px;
+    /* height: 24px; */
+    color: #666666;
+    font-weight: 400;
+    font-size: 16px;
+}
+input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #E8E8E8;
+    font-size: 16px;
+    font-weight: 400;
+    
+}
+.middle>.bigTitle{
+    margin-bottom: 24px;
+}
+#middleWarn{
+    margin-top: 20px;
+    color: #666666;
+    font-weight: 700;
+    font-size: 16px;
+    width: 608px;
+}
+footer{
+    background: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+}
+#foot{
+    line-height: 13px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+} 
+
+#totalPrice{
+    display: flex;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666666;
+}
+#bottom{
+    width: 1090px;
+    padding-right: 110px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+#checkButton{
+    display: flex;
+    align-items: center;
+    background: #448899;
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 400;
+    text-align: center;
+    padding: 10px 20px;
+    width: 133px;
+    height: 16px;
+    border-radius: 5px;
+    margin-bottom: 32px;
+
+}
+.display{
+    display: none;
+}
+.mymouse{
+    cursor: pointer;
+}
+hr{
+    width: 1200px;
+}
+
+#topMiddle{
+    margin-top: 40px;
+    margin-bottom: 46px;
+}
+#middleMiddle{
+    margin-top: 45px;
+    margin-bottom: 46px;
+}
+#middleBottom{
+    margin-top: 40px;
+    margin-bottom: 43px;
+}
+#windowBackground{
+    width: 100vw;
+    background-color: black;
+    opacity: 0.25;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    margin: 0px 0px 0px 0px ;
+}
+#signIn{
+    /* display: none; */
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 275px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signinHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signinImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signinTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signinInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signinButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signinButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signinFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+#signUp{
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 332px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signupHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signupImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signupTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signupInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signupButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signupButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signupFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+.errorText{
+    margin: 0px 15px 10px 15px;
+    height: 22px;
+    width: 310px;
+    color: brown;
+    text-align: center;
+}
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    #head{
+        margin:  auto 10px;
+        padding:  0px 5%;
+    }
+    #header{
+        width: 100%;
+    }
+    #bottom{
+        width: 600px;
+        margin-top: 30px;
+        padding-right: 0px;
+    }
+    .bottomTitle{
+        width: 600px;
+        height: 32px;
+    }
+    hr{
+        width: 90vw;
+    }
+    #top{
+        width: 90vw;
+    }
+    .hero{
+        width: 90vw;
+    }
+    .middle{
+        width: 90vw;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    hr{
+        width:360px;
+    }
+    #head{
+        padding:  0px 0.5%;
+    }
+    #headLeft{
+        margin-left: 10px;
+    }
+    #top{
+        width: 340px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .middle{
+        width: 360px;
+    }
+    #bottom{
+        width: 360px;
+    }
+    #middleWarn{
+        width: 340px;
+    }
+    #hero{
+        flex-direction: column;
+    }
+    #delete{
+        top: 520px;
+        right: 10px;
+        /* position: relative; */
+    }
+    #bookingImg{
+        margin-top: 7px;
+        margin-bottom: 7px;
+        width: 340px;
+        height: 256px;
+    }
+    .middle{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #name{
+        margin-top: 7px;
+    }
+    #hero{
+        margin-top: 7px;
+    }
+    #topMiddle{
+        margin-top: 65px;
+    }   
+    #middleMiddle{
+        margin-top: 40px;
+        margin-bottom: 44px;
+    }
+    #bottom{
+        padding-right: 10px;
+        width: 350px;
+    }
+
+
+}
+
+</style>
+<header>
+    <div id="windowBackground" class="display"></div>
+    <div id="head">
+        <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
+        <div id="headRight">
+            <a class="mymouse" onclick="bookingBut()">預定行程</a>
+            <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
+            <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
+        </div>  
+    </div>  
+</header>
+<div id="signIn" class="display">
+    <div id="signinHead"></div>
+    <div id="signinImg" class="mymouse" onclick="closeWindow()"></div>
+    <div id="signinTitle">登入會員帳號 </div>
+    <input class="signinInput" type="email" id="signinEmail" placeholder="輸入電子信箱">
+    <input class="signinInput" type="password" id="signinPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signinError" >帳號或密碼輸入錯誤</div>
+    <div id="signinButton" onclick="signIn()" class="mymouse">
+        <div id="signinButtonText" >登入帳戶</div>
+    </div>
+    <div id="signinFoot" onclick="signupWindow()">還沒有帳戶？點此註冊</div>   
+</div>
+
+<div id="signUp" class="display">
+    <div id="signupHead"></div>
+    <div id="signupImg" class="mymouse" onclick="closeWindow()"></div>
+    <div id="signupTitle">註冊會員帳號 </div>
+    <input class="signupInput" id="signupName" placeholder="輸入姓名">
+    <input class="signupInput" type="email" id="signupEmail" placeholder="輸入電子信箱">
+    <input class="signupInput" type="password" id="signupPassword" placeholder="輸入密碼">
+    <div class="errorText display" id="signupemailError" >此電子信箱已被註冊</div>
+    <div class="errorText display" id="signupspaceError" >欄位為空白或含非法字元</div>
+    <div id="signupButton" onclick="signUp()" class="mymouse">
+        <div id="signupButtonText" >註冊新帳戶</div>
+    </div>
+    <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
+</div>
+<body onload="checkMember()">
+    <div id="top"> 
+        
+        <div class="bigTitle" id="topTitle">您好<div id="memberName"></div>，待預定的行程如下：</div>
+        <div id="hero">
+            <div id="delete" class="mymouse" onclick="deleteBooking()"></div>
+            <div id="bookingImg"></div>
+            <div>
+                <div class="heroRight" id="name">
+                    <div id="nameTitle">台北一日遊：</div>
+                    <div id="bookingName"></div>
+                </div>
+                <div class="heroRight">
+                    <div class="herorightTitle">日期：</div>
+                    <div class="herorightContent" id="bookingDate"></div>
+                </div>
+                <div class="heroRight">
+                    <div class="herorightTitle">時間：</div>
+                    <div class="herorightContent" id="bookingTime"></div>
+                </div>
+                <div class="heroRight">
+                    <div class="herorightTitle">費用：</div>
+                    <div class="herorightContent" id="bookingPrice"></div>
+                </div>
+                <div class="heroRight">
+                    <div class="herorightTitle">地點：</div>
+                    <div class="herorightContent" id="bookingAddress"></div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    <div id="all" >
+    <hr id="topMiddle">
+    <div class="middle">
+        <div class="bigTitle">您的聯絡資訊</div>
+        <div class="middleContent">
+            <div class="middleTitle">聯絡姓名：</div>
+            <input id="member_Name" >
+        </div>
+        <div class="middleContent">
+            <div class="middleTitle">聯絡信箱：</div>
+            <input id="memberEmail">
+        </div>
+        <div class="middleContent">
+            <div class="middleTitle">手機號碼：</div>
+            <input>
+        </div>
+        <div id="middleWarn">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式</div>
+    </div>
+
+    <hr id="middleMiddle">
+
+    <div class="middle">
+        <div class="bigTitle" >信用卡付款資訊</div>
+        <div class="middleContent">
+            <div class="middleTitle">卡片號碼：</div>
+            <input required placeholder="**** **** **** ****" maxlength="16">
+        </div>
+        <div class="middleContent">
+            <div class="middleTitle">過期時間：</div>
+            <input required placeholder="MM/YY" maxlength="4">
+        </div>
+        <div class="middleContent" id="cardPassword">
+            <div class="middleTitle">驗證密碼：</div>
+            <input required placeholder="CVV" maxlength="3">
+        </div>
+    </div>
+
+    <hr id="middleBottom">
+
+    <div id="bottom">
+        <div id="totalPrice">
+            <div>總價：</div>
+            <div id="total_price">新台幣2000元</div>
+        </div>
+        <div id="checkButton">確認訂購並付款</div>
+    </div>
+    </div>
+</body>
+<footer>
+    <div id="foot">
+        COPYRIGHT © 2021 台北一日遊   
+    </div>
+</footer>
+</html>
+<script type="text/javascript">
+    function deleteBooking(){
+        let deletereq=new XMLHttpRequest();
+        deletereq.open("delete","/api/booking")
+        deletereq.onload=function(){
+            let deleteData=JSON.parse(this.responseText);
+            if(deleteData["ok"]){
+                window.location.reload()
+            }
+        }
+        deletereq.send()
+    }
+    // 取得欲購清單
+    let bookinggetreq=new XMLHttpRequest()
+    bookinggetreq.open("get","/api/booking")
+    bookinggetreq.onload=function(){
+        let bookinggetData=JSON.parse(this.responseText);
+        let bookingData=bookinggetData["data"]
+        if(bookingData==null){ 
+            // alert("456")
+            // window.location.hreh="/"
+            let all=document.getElementById("all")
+            let hero=document.getElementById("hero")
+
+            all.classList.add("display")
+            hero.textContent="現在沒有任何待預定的行程"
+            let footer=document.querySelector("footer")
+            let foot=document.getElementById("foot")
+            footer.style.height="80vh"
+            foot.style.margin="45px auto auto auto"
+
+
+        }else{
+            // 抓取id
+            let bookingName=document.getElementById("bookingName");
+            let bookingImg=document.getElementById("bookingImg")
+            let bookingAddress=document.getElementById("bookingAddress");
+            let bookingDate=document.getElementById("bookingDate");
+            let bookingTime=document.getElementById("bookingTime");
+            let bookingPrice=document.getElementById("bookingPrice");
+            let total_price=document.getElementById("total_price")
+            // 抓取data文字
+            let name=bookingData["attraction"]["name"];
+            let address=bookingData["attraction"]["address"];
+            let img=bookingData["attraction"]["image"];
+            let date=bookingData["date"];
+            let time=bookingData["time"];
+            let price=bookingData["price"];
+            // 文字放入html
+            if(time=="morning"){
+                bookingTime.textContent="早上9點到下午4點"
+            }else if (time=="afternoon"){
+                bookingTime.textContent="下午4點到晚上10點"
+            }
+            bookingName.textContent=name;
+            bookingAddress.textContent=address;
+            bookingDate.textContent=date
+            bookingPrice.textContent="新台幣 "+price+" 元"
+            bookingImg.style.backgroundImage="url("+img+")" 
+            total_price.textContent="新台幣 "+price+" 元"
+        }  
+    }
+    bookinggetreq.send()
+
+    // 預定行程按鈕
+    function bookingBut(){
+        let headsignout=document.getElementById("headsignout").className
+        if (headsignout=="mymouse"){
+            window.location.href="/booking"
+        }else{
+            signinWindow()
+        }
+        console.log(headsignout)
+    }
+
+
+    //確認使用者登入狀態 
+    function checkMember(){
+        let reqMember=new XMLHttpRequest();
+        reqMember.open("get","/api/user")
+        reqMember.onload=function(){
+            let getdata=JSON.parse(this.responseText);
+            let headsignin=document.getElementById("headsignin")
+            let headsignout=document.getElementById("headsignout")
+            let memberName=document.getElementById("memberName")
+            let member_Name=document.getElementById("member_Name")
+            let memberEmail=document.getElementById("memberEmail")
+            if(getdata["data"]!=null){
+                headsignin.classList.add("display")
+                headsignout.classList.remove("display")
+                memberName.textContent="，"+getdata["data"]["name"]
+                member_Name.value=getdata["data"]["name"]
+                memberEmail.value=getdata["data"]["email"]
+            }else{
+                headsignin.classList.remove("display")
+                headsignout.classList.add("display")
+                window.location.href="/"
+            }
+        }
+        reqMember.send()
+    }
+
+    //登出
+    function signOut(){
+        let reqsignOut=new XMLHttpRequest()
+        reqsignOut.open("delete","/api/user")
+        reqsignOut.onload=function(){
+            window.location.reload()
+            headsignin.classList.remove("display")
+            headsignout.classList.add("display")
+            
+        }
+        reqsignOut.send()
+    }
+    
+    // 登入
+    function signIn(){
+        let signineMail=document.getElementById("signinEmail").value
+        let signinPassword=document.getElementById("signinPassword").value
+        let signinError=document.getElementById("signinError")
+        if(signineMail==""|signinPassword==""){
+            signinError.classList.remove("display")
+        }else{
+            let reqsignIn=new XMLHttpRequest()
+            reqsignIn.open("patch","/api/user")
+            reqsignIn.onload=function(){
+                signindata=JSON.parse(this.responseText);
+                // console.log(data)
+                if (signindata["ok"]==true){
+                    window.location.reload()
+                }else{
+                    signinError.classList.remove("display")
+                }
+                
+            }
+            reqsignIn.send(JSON.stringify({"email":signineMail,"password":signinPassword}))
+        }
+    }
+    
+    //註冊
+    function signUp(){
+        let signupName=document.getElementById("signupName").value
+        let signupMail=document.getElementById("signupEmail").value
+        let signupPassword=document.getElementById("signupPassword").value
+        let signupemailError=document.getElementById("signupemailError")
+        let signupspaceError=document.getElementById("signupspaceError")
+        // 判斷input是否空白
+        if(signupName==""| signupMail==""| signupPassword==""){
+            signupspaceError.classList.remove("display")
+        }else{
+            // 連接註冊API
+            let reqsignUp=new XMLHttpRequest();
+            reqsignUp.open("post","/api/user")
+            reqsignUp.onload=function(){
+                signupdata=JSON.parse(this.responseText);
+                if(signupdata["ok"]==true){
+                    //註冊成功則自動登入
+                    let reqsignIn=new XMLHttpRequest()
+                    reqsignIn.open("patch","/api/user")
+                    reqsignIn.onload=function(){
+                        signindata=JSON.parse(this.responseText);
+                        // console.log(data)
+                        if (signindata["ok"]==true){
+                            window.location.reload()
+                        }else{
+                            let signinError=document.getElementById("signinError")
+                            signinError.classList.remove("display")
+                        }
+                        
+                    }
+                    reqsignIn.send(JSON.stringify({"email":signupMail,"password":signupPassword}))
+                }else{
+                    // 註冊失敗顯示原因
+                    signupspaceError.classList.add("display")
+                    signupemailError.classList.remove("display")
+                }
+            }
+            reqsignUp.send(JSON.stringify({"name":signupName,"email":signupMail,"password":signupPassword}))
+
+        }
+        
+
+    }
+
+    // 註冊、登入視窗
+    function signinWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        let windowBackground=document.getElementById("windowBackground")
+        windowBackground.classList.remove("display");
+        signUp.classList.add("display");
+        signIn.classList.remove("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function signupWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        windowBackground.classList.remove("display");
+        signUp.classList.remove("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signinError.classList.add("display");
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    function closeWindow(){
+        let signIn=document.getElementById("signIn");
+        let signUp=document.getElementById("signUp");
+        windowBackground.classList.add("display");
+        signUp.classList.add("display");
+        signIn.classList.add("display");
+        // 隱藏錯誤訊息
+        signupspaceError.classList.add("display");
+        signupemailError.classList.add("display");
+    }
+    
+</script>
