@@ -494,7 +494,7 @@ footer{
     <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
 </div>
 
-<body onload="checkMember()">
+<body onload="start()">
     <div id=heroSection  >
         <div id="hero">
             <div id="heroOne" >輕鬆享受台北一日悠閒</div>
@@ -516,23 +516,30 @@ footer{
 </html>
 <script type="text/javascript">
     //確認使用者登入狀態 
-    function checkMember(){
-        let reqMember=new XMLHttpRequest();
-        reqMember.open("get","/api/user")
-        reqMember.onload=function(){
-            let getdata=JSON.parse(this.responseText);
-            let headsignin=document.getElementById("headsignin")
-            let headsignout=document.getElementById("headsignout")
-            if(getdata["data"]!=null){
-                headsignin.classList.add("display")
-                headsignout.classList.remove("display")
-            }else{
-                headsignin.classList.remove("display")
-                headsignout.classList.add("display")
-            }
-        }
-        reqMember.send()
+
+    function start(){
+        checkMember()
+        // getData()
     }
+    function checkMember(){
+
+            let reqMember=new XMLHttpRequest();
+            reqMember.open("get","/api/user")
+            reqMember.onload=function(){
+                let getdata=JSON.parse(this.responseText);
+                let headsignin=document.getElementById("headsignin")
+                let headsignout=document.getElementById("headsignout")
+                if(getdata["data"]!=null){
+                    headsignin.classList.add("display")
+                    headsignout.classList.remove("display")
+                }else{
+                    headsignin.classList.remove("display")
+                    headsignout.classList.add("display")
+                }
+            }
+            reqMember.send()
+    }
+    
   
 
     //登出
@@ -732,33 +739,38 @@ function createCard(data,whileNumber){
 
 var page=0
 // function getData(){
-// 定位footer距離、移動視窗至最上方
-rect=footer.getBoundingClientRect();
-window.moveTo(0,0);
-let getDatareq=new XMLHttpRequest();
-getDatareq.open("get","/api/attractions");
-getDatareq.onload=function(){
-    let getdata=JSON.parse(this.responseText);
-    // 判斷是否還有下頁資料
-    if(getdata.nextPage==null){
-            // 印出最後一頁資料
-            let whileNumber=0;
-            while (whileNumber<getdata.data.length){
-                createCard(getdata,whileNumber);
-                whileNumber+=1;
+        rect=footer.getBoundingClientRect();
+        window.moveTo(0,0);
+        let getDatareq=new XMLHttpRequest();
+        getDatareq.open("get","/api/attractions");
+        dbConnect=true
+        getDatareq.onload=function(){
+            let getdata=JSON.parse(this.responseText);
+            
+            // 判斷是否還有下頁資料
+            if(getdata.nextPage==null){
+                    // 印出最後一頁資料
+                    let whileNumber=0;
+                    while (whileNumber<getdata.data.length){
+                        createCard(getdata,whileNumber);
+                        whileNumber+=1;
+                    };
+            }else{
+                // 印出本頁資料
+                let whileNumber=0;
+                while (whileNumber<12){
+                    createCard(getdata,whileNumber);
+                    whileNumber+=1;
+                } 
+                page=getdata.nextPage ;
             };
-    }else{
-        // 印出本頁資料
-        let whileNumber=0;
-        while (whileNumber<12){
-            createCard(getdata,whileNumber);
-            whileNumber+=1;
-        } 
-        page=getdata.nextPage ;
-    };
-};
-getDatareq.send();
-// };
+            
+        };
+        getDatareq.send();
+        
+// }
+// 定位footer距離、移動視窗至最上方
+
 function moreData(){
     if(scrolled==false){
         scrolled=true

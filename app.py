@@ -6,13 +6,15 @@ import getpass
 
 #mysql.connector
 password=getpass.getpass(prompt='請輸入資料庫密碼: ', stream=None)
-connection=mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password= password,
-    database='taipeitrip',
-    charset='utf8')
-cursor=connection.cursor()
+def DBconnect():
+	connection=mysql.connector.connect(
+		host="localhost",
+		user="root",
+		password= password,
+		database='taipeitrip',
+		charset='utf8',
+		)
+	return connection
 
 
 app=Flask(__name__)
@@ -50,6 +52,8 @@ def bookingAPI():
 				else:
 					# 抓取景點資料
 					attractionId=attractionpostData["attractionId"]
+					connection=DBconnect()
+					cursor=connection.cursor()
 					cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 					bookingAtt=cursor.fetchone()
 					attractionId=int(bookingAtt[0])
@@ -88,11 +92,29 @@ def bookingAPI():
 @app.route("/api/user",methods=["GET","POST","PATCH","DELETE"])
 def user():
 	try:
+		# 檢查是否登入
+		if request.method=="GET":
+			if session.get("member")!="":
+				memberName=session.get("member")
+				# 連接mysql
+				connection=DBconnect()
+				cursor=connection.cursor()
+				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
+				memberData=cursor.fetchone()
+				if memberData!=None:
+					return {"data":{"id":memberData[0],"name":memberData[1],"email":memberData[2]}}
+				else:
+					session["member"]=""
+					return{"data":None}					
+			else:
+				session["member"]=""
+				return{"data":None}	
 		# 登入
-		if request.method=="PATCH":
+		elif request.method=="PATCH":
 			signin_Data=json.loads(request.data.decode('utf-8'))
 			signinEmail=signin_Data["email"]
 			# 連接mysql
+			connection=DBconnect()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
 			signinData=cursor.fetchone()
@@ -105,25 +127,7 @@ def user():
 				else:
 					return {"error":True,"message":"信箱或密碼錯誤"}
 			else:
-				return {"error":True,"message":"信箱或密碼錯誤"}
-		# 檢查是否登入
-		elif request.method=="GET":
-			if session.get("member")!="":
-				memberName=session.get("member")
-				# 連接mysql
-				cursor=connection.cursor()
-				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
-				memberData=cursor.fetchone()
-				if memberData!=None:
-					return {"data":{"id":memberData[0],"name":memberData[1],"email":memberData[2]}}
-				else:
-					session["member"]=""
-					session["booking"]=""
-					return{"data":None}					
-			else:
-				session["member"]=""
-				session["booking"]=""
-				return{"data":None}			
+				return {"error":True,"message":"信箱或密碼錯誤"}	
 		# 登出
 		elif request.method=="DELETE":
 			session["member"]=""
@@ -136,10 +140,12 @@ def user():
 			signupName=signupData["name"]
 			signupPassword=signupData["password"]
 			if signupEmail!=None or signupName!=None or signupPassword!=None:
+				connection=DBconnect()
 				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
 				signup_member=cursor.fetchone()
 				if signup_member==None:
+					connection=DBconnect()
 					cursor=connection.cursor()
 					cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
 					connection.commit()
@@ -168,11 +174,11 @@ def attractions():
 		# 是否有關鍵字
 		if keyword==None:
 			# 根據緯度排序後抓取資料
+			connection=DBconnect()
+			cursor=connection.cursor()
 			if firstdata==0:
-				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit  %s ",[finaldata])
 			else:
-				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.data order by `latitude` limit %s , %s ",[firstdata,finaldata])  #執行SQL
 			database=cursor.fetchall()
 			dataDict={}
@@ -218,6 +224,7 @@ def attractions():
 		else:
 			# 抓取關鍵字資料
 			keyword="%"+keyword+"%"
+			connection=DBconnect()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.data  where name like %s order by latitude",[keyword])
 			database=cursor.fetchall()
@@ -298,6 +305,7 @@ def attractions():
 def attractionId(attractionId):
 	try:
 		# 抓取id資料
+		connection=DBconnect()
 		cursor=connection.cursor()
 		cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 		database=cursor.fetchall()

@@ -699,7 +699,6 @@ hr{
         }else{
             signinWindow()
         }
-        console.log(headsignout)
     }
 
 
@@ -754,7 +753,6 @@ hr{
             reqsignIn.open("patch","/api/user")
             reqsignIn.onload=function(){
                 signindata=JSON.parse(this.responseText);
-                // console.log(data)
                 if (signindata["ok"]==true){
                     window.location.reload()
                 }else{
@@ -788,7 +786,6 @@ hr{
                     reqsignIn.open("patch","/api/user")
                     reqsignIn.onload=function(){
                         signindata=JSON.parse(this.responseText);
-                        // console.log(data)
                         if (signindata["ok"]==true){
                             window.location.reload()
                         }else{

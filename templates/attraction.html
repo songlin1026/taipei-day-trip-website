@@ -638,7 +638,7 @@ footer{
     <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
 </div>
 
-<body onload="checkMember()">
+<body onload="start()">
     <div id="hero">
         <div id="img">
             <div id="leftImg"  onclick="leftImg()" class="mymouse"></div>
@@ -688,6 +688,12 @@ footer{
 </footer>
 </html>
 <script type="text/javascript">
+    function start(){
+        // getData()
+        checkMember()
+        // checkMember()
+    }
+
     function submit(){
         let date=document.getElementById("dateInput").value
         let price=parseInt(document.getElementById("moneyContent").textContent)
@@ -731,21 +737,23 @@ footer{
     }
     //確認使用者登入狀態 
     function checkMember(){
-        let reqMember=new XMLHttpRequest();
-        reqMember.open("get","/api/user")
-        reqMember.onload=function(){
-            let getdata=JSON.parse(this.responseText);
-            let headsignin=document.getElementById("headsignin")
-            let headsignout=document.getElementById("headsignout")
-            if(getdata["data"]!=null){
-                headsignin.classList.add("display")
-                headsignout.classList.remove("display")
-            }else{
-                headsignin.classList.remove("display")
-                headsignout.classList.add("display")
+
+            let reqMember=new XMLHttpRequest();
+            reqMember.open("get","/api/user")
+            reqMember.onload=function(){
+                let getdata=JSON.parse(this.responseText);
+                let headsignin=document.getElementById("headsignin")
+                let headsignout=document.getElementById("headsignout")
+                if(getdata["data"]!=null){
+                    headsignin.classList.add("display")
+                    headsignout.classList.remove("display")
+                }else{
+                    headsignin.classList.remove("display")
+                    headsignout.classList.add("display")
+                }
             }
-        }
-        reqMember.send()
+            reqMember.send()
+ 
     }
 
     //登出
@@ -927,50 +935,54 @@ footer{
     };
     // 抓取網址、連線api
     time="morning"
-    let req=new XMLHttpRequest();
-    req.open("get","/api"+location.pathname);
-    req.onload=function(){
-        data=JSON.parse(this.responseText);
-        // 抓取id
-        let name=document.getElementById("name");
-        let transport=document.getElementById("transport");
-        let description=document.getElementById("description");
-        let address=document.getElementById("address");
-        let category=document.getElementById("category");
-        let img=document.getElementById("img");
-        // 創造api文字
-        let Name = document.createTextNode(data.data.name);
-        let Description = document.createTextNode(data.data.description);
-        let Address = document.createTextNode(data.data.address);
-        let Transport = document.createTextNode(data.data.transport);
-        // 判斷mrt是否為空值
-        if(data.data.mrt==null){
-            let Category = document.createTextNode(data.data.category);
-            category.appendChild(Category);
-        }else{
-            let Category = data.data.category;
-            let Mrt=data.data.mrt;
-            let content=Category+" at "+Mrt;
-            let Content = document.createTextNode(content);
-            category.appendChild(Content);
-        };
-        imgAmount()
-        // 填入api文字、圖片
-        name.appendChild(Name);
-        description.appendChild(Description);
-        address.appendChild(Address);
-        transport.appendChild(Transport);
-        img.style.backgroundImage="url("+data.data.images[0]+")";
-        //判斷交通方式是否為空值
-        if(data.data.transport==null){
-            let transportTitle=document.getElementById("transportTitle")
-            let transport=document.getElementById("transport")
-            transportTitle.innerHTML=""
-            transport.innerHTML=""
-    }   
-    }
-    req.send();
-    
+    // function getData(){
+            let getdatareq=new XMLHttpRequest();
+            getdatareq.open("get","/api"+location.pathname);
+            getdatareq.onload=function(){
+                data=JSON.parse(this.responseText);
+                // 抓取id
+                let name=document.getElementById("name");
+                let transport=document.getElementById("transport");
+                let description=document.getElementById("description");
+                let address=document.getElementById("address");
+                let category=document.getElementById("category");
+                let img=document.getElementById("img");
+                // 創造api文字
+                let Name = document.createTextNode(data.data.name);
+                let Description = document.createTextNode(data.data.description);
+                let Address = document.createTextNode(data.data.address);
+                let Transport = document.createTextNode(data.data.transport);
+                // 判斷mrt是否為空值
+                if(data.data.mrt==null){
+                    let Category = document.createTextNode(data.data.category);
+                    category.appendChild(Category);
+                }else{
+                    let Category = data.data.category;
+                    let Mrt=data.data.mrt;
+                    let content=Category+" at "+Mrt;
+                    let Content = document.createTextNode(content);
+                    category.appendChild(Content);
+                };
+                imgAmount()
+                // 填入api文字、圖片
+                name.appendChild(Name);
+                description.appendChild(Description);
+                address.appendChild(Address);
+                transport.appendChild(Transport);
+                img.style.backgroundImage="url("+data.data.images[0]+")";
+                //判斷交通方式是否為空值
+                if(data.data.transport==null){
+                    let transportTitle=document.getElementById("transportTitle")
+                    let transport=document.getElementById("transport")
+                    transportTitle.innerHTML=""
+                    transport.innerHTML=""
+                }   
+                
+            }
+            getdatareq.send();
+
+
+    // }
     function clickImg(){
         var img=document.getElementsByClassName("imgChoice")
         var index=[].indexOf.call(img[0].parentElement.children,img[0])
