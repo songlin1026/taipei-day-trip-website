@@ -6,13 +6,15 @@ import getpass
 
 #mysql.connector
 password=getpass.getpass(prompt='請輸入資料庫密碼: ', stream=None)
-connection=mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password= password,
-    database='taipeitrip',
-    charset='utf8')
-cursor=connection.cursor()
+def DBconnect():
+	connection=mysql.connector.connect(
+		host="localhost",
+		user="root",
+		password= password,
+		database='taipeitrip',
+		charset='utf8',
+		)
+	return connection
 
 
 app=Flask(__name__)
@@ -35,42 +37,101 @@ def thankyou():
 	return render_template("thankyou.html")
 
 ######
+@app.route("/api/booking",methods=["GET","POST","DELETE"])
+def bookingAPI():	
+	try:
+		if request.method=="POST":
+			# 檢查是否登入
+			if session.get("member")!="":
+				attractionpostData=json.loads(request.data.decode('utf-8'))
+				# 檢查訂購資料是否有誤
+				if attractionpostData["attractionId"] =="" or attractionpostData["date"] ==""  :
+					return {"error":True,"message":"訂購資料有缺誤"}
+				elif attractionpostData["time"] =="" or attractionpostData["price"] =="" :
+					return {"error":True,"message":"訂購資料有缺誤"}
+				else:
+					# 抓取景點資料
+					attractionId=attractionpostData["attractionId"]
+					connection=DBconnect()
+					cursor=connection.cursor()
+					cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
+					bookingAtt=cursor.fetchone()
+					attractionId=int(bookingAtt[0])
+					attractionName=bookingAtt[1]
+					attractionAddress=bookingAtt[4]
+					attractionImage=eval(bookingAtt[9])[0]
+					bookingDate=attractionpostData["date"]
+					bookingTime=attractionpostData["time"]
+					bookingPrice=int(attractionpostData["price"])
+					# 設定session
+					bookingdic={"attraction":{"id":attractionId,"name":attractionName,"address":attractionAddress,"image":attractionImage},"date":bookingDate,"time":bookingTime,"price":bookingPrice}
+					session["booking"]=bookingdic
+					return {"ok":True}
+			else:
+				return {"error":True,"message":"使用者未登入"}
+		elif request.method=="GET":
+			if session.get("member")=="":
+				return {"error":True,"message":"使用者未登入"}
+			else:
+				if session.get("booking")=="":
+					return {"data":None}
+				else:
+					data=session.get("booking")
+					return {"data":data}
+		elif request.method=="DELETE":
+			session["booking"]=""
+			return {"ok":True}
+		else:
+			return{"error":True}
+	except:
+		return {"error":True,"message":"伺服器有誤"}
+
+
+
+
 @app.route("/api/user",methods=["GET","POST","PATCH","DELETE"])
 def user():
 	try:
-	# 登入
-		if request.method=="PATCH":
-			signin_Data=json.loads(request.data.decode('utf-8'))
-			signinEmail=signin_Data["email"]
-			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
-			signinData=cursor.fetchone()
-			if signinData!=None:
-				if signinData[3]==signin_Data["password"]:
-					session["member"]=signinData[1]
-					return {"ok":True}
-				else:
-					return {"error":True,"message":"信箱或密碼錯誤"}
-			else:
-				return {"error":True,"message":"信箱或密碼錯誤"}
 		# 檢查是否登入
-		elif request.method=="GET":
+		if request.method=="GET":
 			if session.get("member")!="":
 				memberName=session.get("member")
+				# 連接mysql
+				connection=DBconnect()
+				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
 				memberData=cursor.fetchone()
 				if memberData!=None:
 					return {"data":{"id":memberData[0],"name":memberData[1],"email":memberData[2]}}
 				else:
 					session["member"]=""
-					return {"data":None}
-					
+					return{"data":None}					
 			else:
 				session["member"]=""
-				return {"data":None}
-				
+				return{"data":None}	
+		# 登入
+		elif request.method=="PATCH":
+			signin_Data=json.loads(request.data.decode('utf-8'))
+			signinEmail=signin_Data["email"]
+			# 連接mysql
+			connection=DBconnect()
+			cursor=connection.cursor()
+			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
+			signinData=cursor.fetchone()
+			# 判斷是否有使用者資料
+			if signinData!=None:
+				# 檢查密碼是否與帳號相符
+				if signinData[3]==signin_Data["password"]:
+					session["member"]=signinData[1]
+					return {"ok":True}
+				else:
+					return {"error":True,"message":"信箱或密碼錯誤"}
+			else:
+				return {"error":True,"message":"信箱或密碼錯誤"}	
 		# 登出
 		elif request.method=="DELETE":
 			session["member"]=""
+			session["booking"]=""
 			return {"ok":True}
 		# 註冊
 		elif request.method=="POST":
@@ -79,9 +140,13 @@ def user():
 			signupName=signupData["name"]
 			signupPassword=signupData["password"]
 			if signupEmail!=None or signupName!=None or signupPassword!=None:
+				connection=DBconnect()
+				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
 				signup_member=cursor.fetchone()
 				if signup_member==None:
+					connection=DBconnect()
+					cursor=connection.cursor()
 					cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
 					connection.commit()
 					return {"ok":True}
@@ -92,7 +157,7 @@ def user():
 		else:
 			return{"error":True,"message":"伺服器發生錯誤"}
 	except:	
-		{"error": True,"message": "伺服器發生錯誤"}
+		return {"error": True,"message": "伺服器發生錯誤"}
 
 	
 
@@ -109,6 +174,8 @@ def attractions():
 		# 是否有關鍵字
 		if keyword==None:
 			# 根據緯度排序後抓取資料
+			connection=DBconnect()
+			cursor=connection.cursor()
 			if firstdata==0:
 				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit  %s ",[finaldata])
 			else:
@@ -157,6 +224,8 @@ def attractions():
 		else:
 			# 抓取關鍵字資料
 			keyword="%"+keyword+"%"
+			connection=DBconnect()
+			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.data  where name like %s order by latitude",[keyword])
 			database=cursor.fetchall()
 			databaseNumber=len(database)
@@ -236,6 +305,8 @@ def attractions():
 def attractionId(attractionId):
 	try:
 		# 抓取id資料
+		connection=DBconnect()
+		cursor=connection.cursor()
 		cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 		database=cursor.fetchall()
 		databaseNumber=len(database)

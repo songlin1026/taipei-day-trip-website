@@ -10,8 +10,6 @@
     <title>台北一日遊</title>
 </head>
 <style type="text/css">
-
-
 header{
     background: #FFFFFF;
     position: fixed;
@@ -449,6 +447,10 @@ footer{
     z-index: 100;
     margin: 0px 0px 0px 0px ;
 }
+.moneyText{
+    display: flex;
+    font-weight: 400;
+}
 @media screen and (min-width: 600px) and (max-width: 1200px) {
     #head{
         margin:  auto 10px;
@@ -600,7 +602,7 @@ footer{
     <div id="head">
         <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
         <div id="headRight">
-            <a class="mymouse">預定行程</a>
+            <a class="mymouse" onclick="bookingBut()">預定行程</a>
             <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
             <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
         </div>
@@ -610,7 +612,7 @@ footer{
 
 <div id="signIn" class="display">
     <div id="signinHead"></div>
-    <div id="signinImg" onclick="closeWindow()"></div>
+    <div id="signinImg" class="mymouse" onclick="closeWindow()"></div>
     <div id="signinTitle">登入會員帳號 </div>
     <input class="signinInput" type="email" id="signinEmail" placeholder="輸入電子信箱">
     <input class="signinInput" type="password" id="signinPassword" placeholder="輸入密碼">
@@ -623,7 +625,7 @@ footer{
 
 <div id="signUp" class="display">
     <div id="signupHead"></div>
-    <div id="signupImg" onclick="closeWindow()"></div>
+    <div id="signupImg" class="mymouse" onclick="closeWindow()"></div>
     <div id="signupTitle">註冊會員帳號 </div>
     <input class="signupInput" id="signupName" placeholder="輸入姓名">
     <input class="signupInput" type="email" id="signupEmail" placeholder="輸入電子信箱">
@@ -636,7 +638,7 @@ footer{
     <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
 </div>
 
-<body onload="checkMember()">
+<body onload="start()">
     <div id="hero">
         <div id="img">
             <div id="leftImg"  onclick="leftImg()" class="mymouse"></div>
@@ -650,7 +652,7 @@ footer{
             <div id="heroRightbox">
                 <div class="title" id="rightTitle">訂購導覽行程</div>
                 <div id="rightIntro">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-                <div class="title " id="date" >選擇日期：<input type="date" ></div>
+                <div class="title " id="date" >選擇日期：<input  id="dateInput" type="date" required></div>
                 <div class="title" id="time" >選擇時間：
                     <div class="day mymouse" onclick="changeLeftTime()">
                         <div class="timeCheck" id="leftTimeCheck" >
@@ -665,8 +667,8 @@ footer{
                         <div>下半天</div>
                     </div>
                 </div>
-                <div class="title" id="money">導覽費用： <div id="moneyContent">新台幣2000元</div></div>
-                <div id="button" class="mymouse">開始預訂行程</div>
+                <div class="title" id="money">導覽費用： <div class="moneyText">新台幣<div id="moneyContent">2000 </div>元</div></div>
+                <div id="button" class="mymouse" onclick="submit()">開始預訂行程</div>
             </div>
         </div>
     </div>
@@ -686,23 +688,72 @@ footer{
 </footer>
 </html>
 <script type="text/javascript">
+    function start(){
+        // getData()
+        checkMember()
+        // checkMember()
+    }
+
+    function submit(){
+        let date=document.getElementById("dateInput").value
+        let price=parseInt(document.getElementById("moneyContent").textContent)
+        let attractionId=parseInt(location.pathname.slice(12))
+        let img=document.getElementById("img").style.backgroundImage
+        let name=document.getElementById("name").textContent
+        let address=document.getElementById("address").textContent
+        if (date==""){
+            alert("請選取日期")
+        }else{
+            let bookingreq=new XMLHttpRequest()
+            bookingreq.open("post","/api/booking")
+            bookingreq.onload=function(){
+                bookingData=JSON.parse(this.responseText);
+                if (bookingData["message"]=="使用者未登入"){
+                    signinWindow();
+                }else if (bookingData["ok"]==true){
+                    window.sessionStorage.setItem("name",name)
+                    window.sessionStorage.setItem("address",address)
+                    window.sessionStorage.setItem("date",date)
+                    window.sessionStorage.setItem("time",time)
+                    window.sessionStorage.setItem("price",price)
+                    window.sessionStorage.setItem("img",img)
+                    window.location.href="/booking"
+                }else if(bookingData["message"]=="訂購資料有缺誤"){
+                    alert("訂購資料有缺誤")
+                }
+                
+            }
+            bookingreq.send(JSON.stringify({"attractionId":attractionId,"date":date,"time":time,"price":price}))
+        }
+    }
+    // 預定行程按鈕
+    function bookingBut(){
+        let headsignout=document.getElementById("headsignout").className
+        if (headsignout=="mymouse"){
+            window.location.href="/booking"
+        }else{
+            signinWindow()
+        }
+    }
     //確認使用者登入狀態 
     function checkMember(){
-        var reqMember=new XMLHttpRequest();
-        reqMember.open("get","/api/user")
-        reqMember.onload=function(){
-            let getdata=JSON.parse(this.responseText);
-            let headsignin=document.getElementById("headsignin")
-            let headsignout=document.getElementById("headsignout")
-            if(getdata["data"]!=null){
-                headsignin.classList.add("display")
-                headsignout.classList.remove("display")
-            }else{
-                headsignin.classList.remove("display")
-                headsignout.classList.add("display")
+
+            let reqMember=new XMLHttpRequest();
+            reqMember.open("get","/api/user")
+            reqMember.onload=function(){
+                let getdata=JSON.parse(this.responseText);
+                let headsignin=document.getElementById("headsignin")
+                let headsignout=document.getElementById("headsignout")
+                if(getdata["data"]!=null){
+                    headsignin.classList.add("display")
+                    headsignout.classList.remove("display")
+                }else{
+                    headsignin.classList.remove("display")
+                    headsignout.classList.add("display")
+                }
             }
-        }
-        reqMember.send()
+            reqMember.send()
+ 
     }
 
     //登出
@@ -722,7 +773,7 @@ footer{
     function signIn(){
         let signineMail=document.getElementById("signinEmail").value
         let signinPassword=document.getElementById("signinPassword").value
-        var signinError=document.getElementById("signinError")
+        let signinError=document.getElementById("signinError")
         if(signineMail==""|signinPassword==""){
             signinError.classList.remove("display")
         }else{
@@ -730,7 +781,6 @@ footer{
             reqsignIn.open("patch","/api/user")
             reqsignIn.onload=function(){
                 signindata=JSON.parse(this.responseText);
-                // console.log(data)
                 if (signindata["ok"]==true){
                     window.location.reload()
                 }else{
@@ -747,8 +797,8 @@ footer{
         let signupName=document.getElementById("signupName").value
         let signupMail=document.getElementById("signupEmail").value
         let signupPassword=document.getElementById("signupPassword").value
-        var signupemailError=document.getElementById("signupemailError")
-        var signupspaceError=document.getElementById("signupspaceError")
+        let signupemailError=document.getElementById("signupemailError")
+        let signupspaceError=document.getElementById("signupspaceError")
         // 判斷input是否空白
         if(signupName==""| signupMail==""| signupPassword==""){
             signupspaceError.classList.remove("display")
@@ -764,11 +814,10 @@ footer{
                     reqsignIn.open("patch","/api/user")
                     reqsignIn.onload=function(){
                         signindata=JSON.parse(this.responseText);
-                        // console.log(data)
                         if (signindata["ok"]==true){
                             window.location.reload()
                         }else{
-                            var signinError=document.getElementById("signinError")
+                            let signinError=document.getElementById("signinError")
                             signinError.classList.remove("display")
                         }
                         
@@ -791,7 +840,7 @@ footer{
     function signinWindow(){
         let signIn=document.getElementById("signIn");
         let signUp=document.getElementById("signUp");
-        var windowBackground=document.getElementById("windowBackground")
+        let windowBackground=document.getElementById("windowBackground")
         windowBackground.classList.remove("display");
         signUp.classList.add("display");
         signIn.classList.remove("display");
@@ -824,26 +873,28 @@ footer{
     
     //選擇時間
     function changeLeftTime(){
-        var changeLeftTime=document.getElementById("changeLeftTime")
-        var changeRightTime=document.getElementById("changeRightTime")
+        let changeLeftTime=document.getElementById("changeLeftTime")
+        let changeRightTime=document.getElementById("changeRightTime")
+        time="morning"
         changeLeftTime.classList.add("changeTime")
         changeRightTime.classList.remove("changeTime")
-        var moneyContent=document.getElementById("moneyContent")
-        var dollor="新台幣2000元"
+        let moneyContent=document.getElementById("moneyContent")
+        let dollor="2000"
         moneyContent.textContent=dollor
     }
     function changeRightTime(){
-        var changeLeftTime=document.getElementById("changeLeftTime")
-        var changeRightTime=document.getElementById("changeRightTime")
+        let changeLeftTime=document.getElementById("changeLeftTime")
+        let changeRightTime=document.getElementById("changeRightTime")
+        time="afternoon"
         changeLeftTime.classList.remove("changeTime")
         changeRightTime.classList.add("changeTime")
-        var moneyContent=document.getElementById("moneyContent")
-        var dollor="新台幣2500元"
+        let moneyContent=document.getElementById("moneyContent")
+        let dollor="2500"
         moneyContent.textContent=dollor
     }
     // 切換圖片
     function leftImg(){
-        var totalImg=document.getElementsByClassName("imgChoice");
+        let totalImg=document.getElementsByClassName("imgChoice");
         if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
             imgNumber=data.data.images.length-1;
             img.style.backgroundImage="url("+data.data.images[imgNumber]+")";
@@ -857,7 +908,7 @@ footer{
         };
     };
     function rightImg(){
-        var totalImg=document.getElementsByClassName("imgChoice");
+        let totalImg=document.getElementsByClassName("imgChoice");
         if(img.style.backgroundImage=="url(\""+data.data.images[0]+"\")"){
             // 判斷圖片不只1張
             if(data.data.images.length>1){
@@ -883,70 +934,72 @@ footer{
         };
     };
     // 抓取網址、連線api
-    var req=new XMLHttpRequest();
-    req.open("get","/api"+location.pathname);
-    req.onload=function(){
-        data=JSON.parse(this.responseText);
-        // 抓取id
-        var name=document.getElementById("name");
-        var transport=document.getElementById("transport");
-        var description=document.getElementById("description");
-        var address=document.getElementById("address");
-        var category=document.getElementById("category");
-        var img=document.getElementById("img");
-        // 創造api文字
-        console.log(data)
-        var Name = document.createTextNode(data.data.name);
-        var Description = document.createTextNode(data.data.description);
-        var Address = document.createTextNode(data.data.address);
-        var Transport = document.createTextNode(data.data.transport);
-        // 判斷mrt是否為空值
-        if(data.data.mrt==null){
-            var Category = document.createTextNode(data.data.category);
-            category.appendChild(Category);
-        }else{
-            var Category = data.data.category;
-            var Mrt=data.data.mrt;
-            var content=Category+" at "+Mrt;
-            console.log(content);
-            var Content = document.createTextNode(content);
-            category.appendChild(Content);
-        };
-        imgAmount()
-        // 填入api文字、圖片
-        name.appendChild(Name);
-        description.appendChild(Description);
-        address.appendChild(Address);
-        transport.appendChild(Transport);
-        img.style.backgroundImage="url("+data.data.images[0]+")";
-        //判斷交通方式是否為空值
-        console.log(data)
-        if(data.data.transport==null){
-            var transportTitle=document.getElementById("transportTitle")
-            var transport=document.getElementById("transport")
-            transportTitle.innerHTML=""
-            transport.innerHTML=""
-    }   
-    }
-    req.send();
+    time="morning"
+    // function getData(){
+            let getdatareq=new XMLHttpRequest();
+            getdatareq.open("get","/api"+location.pathname);
+            getdatareq.onload=function(){
+                data=JSON.parse(this.responseText);
+                // 抓取id
+                let name=document.getElementById("name");
+                let transport=document.getElementById("transport");
+                let description=document.getElementById("description");
+                let address=document.getElementById("address");
+                let category=document.getElementById("category");
+                let img=document.getElementById("img");
+                // 創造api文字
+                let Name = document.createTextNode(data.data.name);
+                let Description = document.createTextNode(data.data.description);
+                let Address = document.createTextNode(data.data.address);
+                let Transport = document.createTextNode(data.data.transport);
+                // 判斷mrt是否為空值
+                if(data.data.mrt==null){
+                    let Category = document.createTextNode(data.data.category);
+                    category.appendChild(Category);
+                }else{
+                    let Category = data.data.category;
+                    let Mrt=data.data.mrt;
+                    let content=Category+" at "+Mrt;
+                    let Content = document.createTextNode(content);
+                    category.appendChild(Content);
+                };
+                imgAmount()
+                // 填入api文字、圖片
+                name.appendChild(Name);
+                description.appendChild(Description);
+                address.appendChild(Address);
+                transport.appendChild(Transport);
+                img.style.backgroundImage="url("+data.data.images[0]+")";
+                //判斷交通方式是否為空值
+                if(data.data.transport==null){
+                    let transportTitle=document.getElementById("transportTitle")
+                    let transport=document.getElementById("transport")
+                    transportTitle.innerHTML=""
+                    transport.innerHTML=""
+                }   
+                
+            }
+            getdatareq.send();
+
+
+    // }
     function clickImg(){
         var img=document.getElementsByClassName("imgChoice")
         var index=[].indexOf.call(img[0].parentElement.children,img[0])
         var img=this
-        console.log(index)
     }
     function imgAmount(){
         imgNumber=data.data.images.length;
-        var whileNumber=0
+        let whileNumber=0
         while(whileNumber<imgNumber){
-            var newDiv=document.createElement("div");
-            var imgCenter=document.getElementById("imgCenter");
+            let newDiv=document.createElement("div");
+            let imgCenter=document.getElementById("imgCenter");
             newDiv.classList.add("imgChoice");
             newDiv.setAttribute("onClick","clickImg()")
             imgCenter.appendChild(newDiv);
             whileNumber+=1;
         };
-        var totalImg=document.getElementsByClassName("imgChoice");
+        let totalImg=document.getElementsByClassName("imgChoice");
         totalImg[0].setAttribute("id","nowImg");
     };
     
