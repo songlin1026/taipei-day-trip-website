@@ -1,5 +1,7 @@
 from flask import *
 
+import urllib.request 
+import urllib.parse
 import json
 import mysql.connector
 import getpass
@@ -37,6 +39,104 @@ def thankyou():
 	return render_template("thankyou.html")
 
 ######
+@app.route("/api/order/<orderNumber>",methods=["GET"])
+def orderapi(orderNumber):
+	if session.get("member")!="":
+		ordergetData=session.get("order")
+		# 串接TapPay api
+		orderGet={"partner_key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7","records_per_page":1,"filters":{"rec_trade_id":orderNumber}}
+		url="https://sandbox.tappaysdk.com/tpc/transaction/query"
+		headers={"content-type": "application/json","x-api-key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7"}
+		orderGet=json.dumps(orderGet).encode('utf-8')
+		tappaygetResponse=urllib.request.Request(url,orderGet,headers)
+		# 解碼TapPay Data
+		tappaygetData=urllib.request.urlopen(tappaygetResponse).read().decode('utf-8')
+		tappaygetData=json.loads(tappaygetData)
+
+		# 查無交易紀錄
+		if tappaygetData["status"]!=2:
+			return {"error":True,"message":"查無交易紀錄"}
+		# 授權交易未請款
+		elif tappaygetData["trade_records"][0]["record_status"]==0:
+			return ordergetData
+		# 交易完成
+		elif tappaygetData["trade_records"][0]["record_status"]==1:
+			return ordergetData
+		# 待付款
+		elif tappaygetData["trade_records"][0]["record_status"]==4:
+			return ordergetData
+		else:
+			return {"error":True,"message":"查無交易紀錄"}
+	else:
+		return{"error":True,"message":"使用者未登入"}
+
+
+
+
+
+@app.route("/api/orders",methods=["POST"])
+def ordersapi():
+		if session.get("member")!="":
+			# 串接TapPay api
+			orderData=json.loads(request.data.decode('utf-8'))
+			url="https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
+			payment=False
+			# 整理request
+			data={
+				"prime":orderData["prime"],
+				"partner_key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7",
+				"merchant_id":"songlin1026_TAISHIN",
+				"amount":orderData["order"]["price"],
+				"details":"taipeidayTrip",
+				"cardholder":{
+					"phone_number":orderData["order"]["contact"]["phone"],
+					"name":orderData["order"]["contact"]["name"],
+					"email":orderData["order"]["contact"]["email"],
+				}
+			}
+			data=json.dumps(data).encode('utf-8')
+			headers={"content-type": "application/json","x-api-key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7"}
+			# 開始串接TapPay 
+			tappayResponse=urllib.request.Request(url,data,headers)
+			# 解碼TapPay Data
+			tappayData=urllib.request.urlopen(tappayResponse).read().decode('utf-8')
+			tappayData=json.loads(tappayData)
+			# 整理seesion
+			ordergetsession={
+				"data":{
+					"number":tappayData["rec_trade_id"],
+					"price":orderData["order"]["price"],
+					"trip":{
+						"attraction":{
+							"id":orderData["order"]["trip"]["attraction"]["id"],
+							"name":orderData["order"]["trip"]["attraction"]["name"],
+							"address":orderData["order"]["trip"]["attraction"]["address"],
+							"image":orderData["order"]["trip"]["attraction"]["image"]
+						},
+						"date":orderData["order"]["trip"]["date"],
+						"time":orderData["order"]["trip"]["time"]
+					},
+					"contact":{
+						"name":orderData["order"]["contact"]["name"],
+						"email":orderData["order"]["contact"]["email"],
+						"phone":orderData["order"]["contact"]["phone"]
+					},
+					"status":tappayData["status"]
+				}
+			}
+
+			if tappayData["status"]!=0:
+				return {"error":True,"message":"訂單建立失敗"}
+			else:
+				session["order"]=ordergetsession
+				session["booking"]=""
+				payment=True
+				return {"data":{"number":tappayData["rec_trade_id"],"payment":{"status":tappayData["status"],"message":"付款成功"}}}
+		else:
+			return {"error":True,"message":"會員未登入"}
+
+
+
 @app.route("/api/booking",methods=["GET","POST","DELETE"])
 def bookingAPI():	
 	try:
