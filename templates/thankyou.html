@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+    <title>台北一日遊</title>
+</head>
+<style type="text/css">
+    header{
+        background: #FFFFFF;
+        position: fixed;
+        z-index: 100;
+        width: 100%;
+        height: 54px;
+        left: 0px;
+        top: 0px;
+        border-bottom: 1px solid gainsboro;
+    
+    
+    }
+    #head{
+        max-width: 1200px;
+        height: 54px;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        margin: auto;
+    }
+    #headLeft{
+        color: #448899;
+        text-align: center;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 34px;
+    }
+    #headRight{
+        color: #666666;
+        text-align: center;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 13px;
+    }
+    #headRight>a{
+        margin: 0px 10px;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        font-family: 'Noto Sans TC', sans-serif;
+        align-items: center;
+    
+    }
+    #top{
+        margin-top: 54px;
+        width: 1100px;
+        position: relative;
+        padding-left: 100px;
+    }
+    #topTitle{
+        margin-top: 75px;
+        margin-bottom: 35px;
+        display: flex;
+    }
+    
+
+    .bigTitle{
+        /* margin-top: 46px; */
+        color: #666666;
+        font-size: 19px;
+        font-weight: 700;
+    }
+    #hero{
+        display: flex;
+        margin-left: 2px;
+        color: #666666;
+        font-weight: 400;
+        font-size: 16px;
+    }
+    .heroRight{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .herorightTitle{
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        height: 14px;
+        color: #666666;
+    }
+    .herorightContent{
+        font-size: 16px;
+        font-weight: 400;
+        height: 14px;
+        color: #666666;
+    
+    }
+    
+    input{
+        width: 180px;
+        height: 18px;
+        padding: 10px;
+        border: 1px solid #E8E8E8;
+        font-size: 16px;
+        font-weight: 400;
+        
+    }
+    
+    footer{
+        background: #757575;
+        height: 104px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top: 40px;
+    }
+    #foot{
+        line-height: 13px;
+        margin: auto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 13px;
+        color: #FFFFFF;
+    } 
+    
+    #totalPrice{
+        display: flex;
+        margin-bottom: 25px;
+        font-weight: 700;
+        font-size: 16px;
+        color: #666666;
+    }
+    
+    #checkButton{
+        display: flex;
+        align-items: center;
+        background: #448899;
+        color: #FFFFFF;
+        font-size: 19px;
+        font-weight: 400;
+        text-align: center;
+        padding: 10px 20px;
+        width: 133px;
+        height: 16px;
+        border-radius: 5px;
+        margin-bottom: 32px;
+    
+    }
+    .display{
+        display: none;
+    }
+    .mymouse{
+        cursor: pointer;
+    }
+    hr{
+        width: 1200px;
+    }
+    
+
+    .tpfield {
+            height: 40px;
+            width: 300px;
+            border: 1px solid gray;
+            margin: 5px 0;
+            padding: 5px;
+    }
+    .orderResult{
+        margin-bottom: 17.5px;
+    }
+    
+    
+    
+    @media screen and (min-width: 600px) and (max-width: 1200px) {
+        #head{
+            margin:  auto 10px;
+            padding:  0px 5%;
+        }
+        #header{
+            width: 100%;
+        }
+        hr{
+            width: 90vw;
+        }
+        .hero{
+            width: 90vw;
+        }
+    }
+    
+    
+    @media screen and (max-width: 600px) {
+        hr{
+            width:360px;
+        }
+        #head{
+            padding:  0px 0.5%;
+        }
+        #headLeft{
+            margin-left: 10px;
+        }
+        #hero{
+            flex-direction: column;
+        }
+        #name{
+            margin-top: 7px;
+        }
+        #hero{
+            margin-top: 7px;
+        }
+    }
+</style>
+<header>
+    <div id="windowBackground" class="display"></div>
+    <div id="head">
+        <div id="headLeft" onclick="location.href='/'" class="mymouse"><a >台北一日遊</a></div>
+        <div id="headRight">
+            <a class="mymouse" onclick="bookingBut()">預定行程</a>
+            <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
+            <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
+        </div>  
+    </div>  
+</header>
+
+<body onload="checkMember()">
+    <div class="bigTitle" id="topTitle">您好<div id="memberName"></div>，已訂購行程如下：</div>
+    <div class="orderResult" id="orderResult"></div>
+    <div id="orderMessage"></div>
+</body>
+<footer>
+    <div id="foot">
+        COPYRIGHT © 2021 台北一日遊   
+    </div>
+</footer>
+</html>
+<script type="text/javascript">
+queryname=location.search.slice(8)
+let reqOrder=new XMLHttpRequest();
+reqOrder.open("get","/api/order/"+queryname)
+reqOrder.onload=function(){
+    Orderdata=JSON.parse(this.responseText);
+    let orderResult=document.getElementById("orderResult")
+    let orderMessage=document.getElementById("orderMessage")
+    if(Orderdata["error"]==true){
+        orderResult.textContent=Orderdata["message"]
+    }else{
+        orderResult.textContent="您已完成訂購\r"
+        orderMessage.textContent="您的訂單編號為"+Orderdata["data"]["number"]
+    }
+}
+reqOrder.send()
+
+//確認使用者登入狀態 
+    function checkMember(){
+        let reqMember=new XMLHttpRequest();
+        reqMember.open("get","/api/user")
+        reqMember.onload=function(){
+            getdata=JSON.parse(this.responseText);
+            let headsignin=document.getElementById("headsignin")
+            let headsignout=document.getElementById("headsignout")
+            let memberName=document.getElementById("memberName")
+            let member_Name=document.getElementById("member_Name")
+            let memberEmail=document.getElementById("memberEmail")
+            if(getdata["data"]!=null){
+                headsignin.classList.add("display")
+                headsignout.classList.remove("display")
+                memberName.textContent="，"+getdata["data"]["name"]
+            }else{
+                headsignin.classList.remove("display")
+                headsignout.classList.add("display")
+                window.location.href="/"
+            }
+        }
+        reqMember.send()
+    }
+
+    //登出
+    function signOut(){
+        let reqsignOut=new XMLHttpRequest()
+        reqsignOut.open("delete","/api/user")
+        reqsignOut.onload=function(){
+            window.location.reload()
+            headsignin.classList.remove("display")
+            headsignout.classList.add("display")
+            
+        }
+        reqsignOut.send()
+    }
+    // 預定行程按鈕
+        function bookingBut(){
+        let headsignout=document.getElementById("headsignout").className
+        if (headsignout=="mymouse"){
+            window.location.href="/booking"
+        }else{
+            signinWindow()
+        }
+    }
+
+</script>
