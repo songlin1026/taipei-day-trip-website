@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    font-family: 'Noto Sans TC', sans-serif;
+    align-items: center;
+}
+.bigTitle{
+    margin-top: 75px;
+    margin-bottom: 35px;
+    display: flex;
+
+    color: #666666;
+    font-size: 19px;
+    font-weight: 700;
+}
+.orderResult{
+    margin-bottom: 17.5px;
+}
+footer{
+    height: 80vh;
+}
+#foot{
+    margin:45px auto auto auto;
+}

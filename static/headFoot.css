@@ -1,0 +1,291 @@
+.errorText{
+    margin: 0px 15px 10px 15px;
+    height: 22px;
+    width: 310px;
+    color: brown;
+    text-align: center;
+}
+#windowBackground{
+    width: 100vw;
+    background-color: black;
+    opacity: 0.25;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    margin: 0px 0px 0px 0px ;
+}
+
+.display{
+    display: none;
+}
+.mymouse{
+    cursor: pointer;
+}
+/* head */
+header{
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 54px;
+    left: 0px;
+    top: 0px;
+    border-bottom: 1px solid #E8E8E8;
+
+}
+#head{
+    max-width: 1200px;
+    height: 54px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+#headLeft{
+    color: #448899;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 34px;
+}
+#headRight{
+    color: #666666;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+}
+#headRight>a{
+    margin: 0px 10px;
+}
+
+/* signin */
+
+#signIn{
+    /* display: none; */
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 275px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signinHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signinImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signinTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signinInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signinButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signinButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signinFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+
+/* signup */
+#signUp{
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 340px;
+    /* height: 332px; */
+    height: auto;
+    top: 80px;
+    left: 50%;
+    transform:translate(-50%, 0);
+    border-radius: 5px;
+}
+#signupHead{
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+#signupImg{
+    background: url(/static/icon_close.png);
+    height: 16px;
+    width: 16px;
+    position: fixed;
+    top: 27px;
+    right: 17px;
+}
+#signupTitle{
+    margin: 0px auto 0px auto;
+    width: 310px;
+    height: 27px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 15px auto 10px auto;
+    text-align: center;
+
+}
+.signupInput{
+    width: 280px;
+    height: 17px;
+    border: 1px #CCCCCC solid;
+    color: #666666;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 5px 15px;
+    text-align: left;
+}
+#signupButton{
+    width: 270px;
+    height: 27px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px auto;
+}
+#signupButtonText{
+    width: 270px;
+    height: 27px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    /* margin: 10px 20px; */
+}
+#signupFoot{
+    width: 310px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+}
+/* foot */
+/* footer{
+    background: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+}
+#foot{
+    line-height: 13px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+}  */
+
+footer{
+    background: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+}
+#foot{
+    line-height: 13px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+} 
+/* .ham{
+    display: none;
+    background: url(/static/ham.png);
+    width: 35px;
+    height: 35px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+} */
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    #head{
+        margin:  auto 10px;
+        padding:  0px 5%;
+    }
+    #header{
+        width: 100%;
+    }
+    
+}
+ 
+
+
+@media screen and (max-width: 600px) {
+    #head{
+        padding:  0px 0.5%;
+        margin:  auto 10px;
+        flex-wrap: wrap;
+    }
+    #header{
+        width: 360px;
+    }
+    #headLeft{
+        margin-left: 10px;
+    }
+}

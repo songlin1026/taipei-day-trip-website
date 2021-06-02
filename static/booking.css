@@ -1,0 +1,245 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    font-family: 'Noto Sans TC', sans-serif;
+    align-items: center;
+
+}
+#top{
+    margin-top: 54px;
+    width: 1100px;
+    position: relative;
+    padding-left: 100px;
+}
+#topTitle{
+    margin-top: 46px;
+    margin-bottom: 35px;
+    display: flex;
+}
+
+#delete{
+    background: url(/static/icon_delete.png);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 97px;
+    right: 110px;
+}
+.bigTitle{
+    color: #666666;
+    font-size: 19px;
+    font-weight: 700;
+}
+#hero{
+    display: flex;
+    margin-left: 2px;
+    color: #666666;
+    font-weight: 400;
+    font-size: 16px;
+}
+.heroRight{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#bookingImg{
+    width: 266px;
+    height: 200px;
+    margin-right: 22px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+
+}
+#name{
+    font-size: 16px;
+    color: #448899;
+    font-weight: 700;
+    height: 14px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.herorightTitle{
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 14px;
+    color: #666666;
+}
+.herorightContent{
+    font-size: 16px;
+    font-weight: 400;
+    height: 14px;
+    color: #666666;
+
+}
+.middle{
+    width: 1090px;
+    padding-left: 110px;
+}
+.middleContent{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.middleTitle{
+    width: 81px;
+    color: #666666;
+    font-weight: 400;
+    font-size: 16px;
+}
+input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #E8E8E8;
+    font-size: 16px;
+    font-weight: 400;
+    
+}
+.middle>.bigTitle{
+    margin-bottom: 24px;
+}
+#middleWarn{
+    margin-top: 20px;
+    color: #666666;
+    font-weight: 700;
+    font-size: 16px;
+    width: 608px;
+}
+#totalPrice{
+    display: flex;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666666;
+}
+#bottom{
+    width: 1090px;
+    padding-right: 110px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+#checkButton{
+    display: flex;
+    align-items: center;
+    background: #448899;
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 400;
+    text-align: center;
+    padding: 10px 20px;
+    width: 133px;
+    height: 16px;
+    border-radius: 5px;
+    margin-bottom: 32px;
+
+}
+hr{
+    width: 1200px;
+}
+#topMiddle{
+    margin-top: 40px;
+    margin-bottom: 46px;
+}
+#middleMiddle{
+    margin-top: 45px;
+    margin-bottom: 46px;
+}
+#middleBottom{
+    margin-top: 40px;
+    margin-bottom: 43px;
+}
+.tpfield{
+        height: 18px;
+        width: 180px;
+        border: 1px solid #E8E8E8;
+        margin: 5px 0;
+        padding: 10px;
+        font-size:16px;
+        font-weight: 400;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    #bottom{
+        width: 600px;
+        margin-top: 30px;
+        padding-right: 0px;
+    }
+    .bottomTitle{
+        width: 600px;
+        height: 32px;
+    }
+    hr{
+        width: 90vw;
+    }
+    #top{
+        width: 90vw;
+    }
+    .hero{
+        width: 90vw;
+    }
+    .middle{
+        width: 90vw;
+    }
+}
+ 
+
+
+@media screen and (max-width: 600px) {
+    hr{
+        width:360px;
+    }
+    #top{
+        width: 340px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .middle{
+        width: 360px;
+    }
+    #bottom{
+        width: 360px;
+    }
+    #middleWarn{
+        width: 340px;
+    }
+    #hero{
+        flex-direction: column;
+    }
+    #delete{
+        top: 520px;
+        right: 10px;
+    }
+    #bookingImg{
+        margin-top: 7px;
+        margin-bottom: 7px;
+        width: 340px;
+        height: 256px;
+    }
+    .middle{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #name{
+        margin-top: 7px;
+    }
+    #hero{
+        margin-top: 7px;
+    }
+    #topMiddle{
+        margin-top: 65px;
+    }   
+    #middleMiddle{
+        margin-top: 40px;
+        margin-bottom: 44px;
+    }
+    #bottom{
+        padding-right: 10px;
+        width: 350px;
+    }
+}

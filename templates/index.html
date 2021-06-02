@@ -1,457 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 字體 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/headFoot.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/index.css" charset="utf-8"/>
+    <!-- JS -->
+    <script src="/static/member.js"></script>
+    <script src="/static/index.js"></script>
     <title>台北一日遊</title>
 </head>
-<style type="text/css">
-
-body{
-    margin: 54px 0px 0px 0px ;
-    font-family: 'Noto Sans TC', sans-serif;;
-}
-header{
-    background: #FFFFFF;
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    height: 54px;
-    left: 0px;
-    top: 0px;
-
-
-}
-#head{
-    max-width: 1200px;
-    height: 54px;
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    margin: auto;
-}
-#headLeft{
-    color: #448899;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 34px;
-}
-#headRight{
-    color: #666666;
-    text-align: center;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 13px;
-}
-#headRight>a{
-    margin: 0px 10px;
-}
-.total{
-    width: 1200px;
-    margin-left:auto;
-    margin-right: auto;
-    /* border: blue 1px solid; */
-
-}
-#heroSection{
-    background: url(/static/welcome\ 1.png),linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
-    background-position:80% 0px;
-    background-repeat: no-repeat;
-    position: relative;
-    height: 320px;
-    /* padding: auto; */
-    /* padding-left: 18%; */
-
-}
-#hero{
-    max-width: 1200px;
-    margin: auto;
-
-}
-#heroOne{
-    /* margin: 0px 20% 0px 20%; */
-    padding: 85px 10px 0px 10px;
-    width: auto;
-    height: 41px;
-    color: #F8F8F8;
-    text-align: left;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 24px;
-}
-#heroTwo{
-    margin: 15px 0px 0px 0px;
-    padding: 0px 10px;
-    width: auto;
-    height: 22px;
-    color: #F8F8F8;
-    text-align: left;
-    line-height: 13.3px;
-    font-size:16px;
-    font-style: normal;
-}
-#searchPar{
-    display: flex;
-    width: 100%;
-    padding-left: 10px;
-}
-#searchInput{
-    margin: 25px 0px 0px 0px;
-    padding: 0px 10px;
-    text-align: left;
-    height: 46px;
-    width: 30%;
-    border-radius:5px 0px 0px 5px;
-    border:0px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 13px;
-}
-#searchImg{
-    
-    margin-top: 25px;
-    width: 60px;
-    height: 46px;
-    border-radius:0px 5px 5px 0px;
-    background: url(/static/icon_search.png);
-    background-color: #448899;
-    background-repeat: no-repeat;
-    background-size: 30px;
-    background-position: center center;
-    
-}
-.content{
-    color: #757575;
-    margin: 55px auto 25px auto ;
-    max-width: 1200px;
-    position: relative;
-}
-.card{
-    height: 242px;
-    width:22%;
-    background: white;
-    margin: 0px 15px 30px 15px;
-    display: inline-block;
-    border: 1px solid #E8E8E8;
-    box-sizing: border-box;
-    border-radius: 5px;
-    
-}
-.photo{
-    height: 202px;
-}
-.img{
-    /* width: 270px; */
-    height: 158px;
-
-    
-}
-.name{
-    height: 22px;
-    padding: 15px 10px 7px 10px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 13px;
-    
-}
-.describe{
-    height: 40px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 10px 12px 10px;
-}
-footer{
-    background: #757575;
-    height: 104px;
-    display: flex;
-    align-items: center;
-}
-#foot{
-    line-height: 13px;
-    margin: auto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 13px;
-    color: #FFFFFF;
-} 
-#mouse{
-    cursor: pointer;
-    opacity: 80%
-}
-.display{
-        display: none;
-    }
-#signIn{
-    /* display: none; */
-    position: fixed;
-    z-index: 100;
-    background-color: white;
-    width: 340px;
-    /* height: 275px; */
-    height: auto;
-    top: 80px;
-    left: 50%;
-    transform:translate(-50%, 0);
-    border-radius: 5px;
-}
-#signinHead{
-    border-radius: 5px 5px 0px 0px;
-    width: 100%;
-    height: 10px;
-    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
-}
-#signinImg{
-    background: url(/static/icon_close.png);
-    height: 16px;
-    width: 16px;
-    position: fixed;
-    top: 27px;
-    right: 17px;
-}
-#signinTitle{
-    margin: 0px auto 0px auto;
-    width: 310px;
-    height: 27px;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
-    color: #666666;
-    margin: 15px auto 10px auto;
-    text-align: center;
-
-}
-.signinInput{
-    width: 280px;
-    height: 17px;
-    border: 1px #CCCCCC solid;
-    color: #666666;
-    padding: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 5px;
-    margin: 5px 15px;
-    text-align: left;
-}
-#signinButton{
-    width: 270px;
-    height: 27px;
-    background: #448899;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px auto;
-}
-#signinButtonText{
-    width: 270px;
-    height: 27px;
-    text-align: center;
-    font-size: 19px;
-    font-weight: 400;
-    color: #FFFFFF;
-    /* margin: 10px 20px; */
-}
-#signinFoot{
-    width: 310px;
-    height: 22px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    margin: 5px 15px 15px 15px;
-    text-align: center;
-}
-#signUp{
-    position: fixed;
-    z-index: 100;
-    background-color: white;
-    width: 340px;
-    /* height: 332px; */
-    height: auto;
-    top: 80px;
-    left: 50%;
-    transform:translate(-50%, 0);
-    border-radius: 5px;
-}
-#signupHead{
-    border-radius: 5px 5px 0px 0px;
-    width: 100%;
-    height: 10px;
-    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
-}
-#signupImg{
-    background: url(/static/icon_close.png);
-    height: 16px;
-    width: 16px;
-    position: fixed;
-    top: 27px;
-    right: 17px;
-}
-#signupTitle{
-    margin: 0px auto 0px auto;
-    width: 310px;
-    height: 27px;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
-    color: #666666;
-    margin: 15px auto 10px auto;
-    text-align: center;
-
-}
-.signupInput{
-    width: 280px;
-    height: 17px;
-    border: 1px #CCCCCC solid;
-    color: #666666;
-    padding: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 5px;
-    margin: 5px 15px;
-    text-align: left;
-}
-#signupButton{
-    width: 270px;
-    height: 27px;
-    background: #448899;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px auto;
-}
-#signupButtonText{
-    width: 270px;
-    height: 27px;
-    text-align: center;
-    font-size: 19px;
-    font-weight: 400;
-    color: #FFFFFF;
-    /* margin: 10px 20px; */
-}
-#signupFoot{
-    width: 310px;
-    height: 22px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    margin: 5px 15px 15px 15px;
-    text-align: center;
-}
-.errorText{
-    margin: 0px 15px 10px 15px;
-    height: 22px;
-    width: 310px;
-    color: brown;
-    text-align: center;
-}
-.display{
-    display: none;
-}
-.mymouse{
-    cursor: pointer;
-}
-#windowBackground{
-    width: 100vw;
-    background-color: black;
-    opacity: 0.25;
-    height: 100vh;
-    position: fixed;
-    z-index: 100;
-    margin: 0px 0px 0px 0px ;
-}
-
-
-
-@media screen and (min-width: 600px) and (max-width: 1200px) {
-    #head{
-        padding:  0px 5%;
-    }
-    .content{
-        width:650px;
-        margin:55px auto 55px auto;
-        text-align: center
-
-    }
-    .card{
-        height: 242px;
-        width:280px;
-        background: white;
-        margin: 15px 1.5% 15px 1.5%;
-        /* padding:15px 2.5% 15px 2.5%; */
-    }
-    .name{
-        text-align:left
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #head{
-        padding:  0px 0.5%;
-    }
-    #headLeft{
-        margin-left: 10px;
-    }
-    #heroSection{
-        height: 280px;
-        background: url(/static/welcome\ 1.png),linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
-        background-size: 276px,auto 280px;
-        background-repeat: no-repeat;
-        background-position: 150% bottom ,left top;
-    }
-    #heroOne{
-        padding-top: 65px;
-        padding-left: auto;
-    }
-    #searchInput{
-        width: 230px;
-    }
-    .content{
-        width: 322px;
-        margin-top: 47.5px;
-    }
-    .card{
-        width: 322px;
-        height: 280px;
-        margin: 7.5px auto;
-    }
-    .photo{
-        height: 232px;
-    }
-    .img{
-        width: 322px;
-        height: 202px;
-        
-        padding-bottom: 8px;
-    }
-    .photo>.img>img{
-        width: 321px;
-        height: 202px;
-        object-fit: cover;
-        border-radius: 5px 5px 0px 0px ;
-    }
-    .name{
-        height: 22px;
-        padding: 0px;
-        margin: 8px auto 48px 10px;
-    }
-    .describe{
-        padding-top: 15px;
-        padding-bottom: 13px;
-        height: 20px;
-    }
-
-}
-
-</style>
 <header>
     <div id="windowBackground" class="display">
     </div>
@@ -476,7 +36,7 @@ footer{
     <div id="signinButton" onclick="signIn()" class="mymouse">
         <div id="signinButtonText" >登入帳戶</div>
     </div>
-    <div id="signinFoot" onclick="signupWindow()">還沒有帳戶？點此註冊</div>   
+    <div id="signinFoot" class="mymouse" onclick="signupWindow()">還沒有帳戶？點此註冊</div>   
 </div>
 
 <div id="signUp" class="display">
@@ -491,7 +51,7 @@ footer{
     <div id="signupButton" onclick="signUp()" class="mymouse">
         <div id="signupButtonText" >註冊新帳戶</div>
     </div>
-    <div id="signupFoot" onclick="signinWindow()">已經有帳戶？點此登入</div>   
+    <div id="signupFoot" class="mymouse" onclick="signinWindow()">已經有帳戶？點此登入</div>   
 </div>
 
 <body onload="start()">
@@ -507,165 +67,19 @@ footer{
     </div>
     <div class="content" id="content">
     </div>
+    <div id="loading_box" class="loading_box">
+        <div class="loading"></div>
+    </div>
 </body>
+
 <footer >
     <div id="foot" >
         COPYRIGHT © 2021 台北一日遊   
     </div>
 </footer>
 </html>
-<script type="text/javascript">
-    //確認使用者登入狀態 
+<script type="text/javascript">  
 
-    function start(){
-        checkMember()
-        // getData()
-    }
-    function checkMember(){
-
-            let reqMember=new XMLHttpRequest();
-            reqMember.open("get","/api/user")
-            reqMember.onload=function(){
-                let getdata=JSON.parse(this.responseText);
-                let headsignin=document.getElementById("headsignin")
-                let headsignout=document.getElementById("headsignout")
-                if(getdata["data"]!=null){
-                    headsignin.classList.add("display")
-                    headsignout.classList.remove("display")
-                }else{
-                    headsignin.classList.remove("display")
-                    headsignout.classList.add("display")
-                }
-            }
-            reqMember.send()
-    }
-    
-  
-
-    //登出
-    function signOut(){
-        let reqsignOut=new XMLHttpRequest()
-        reqsignOut.open("delete","/api/user")
-        reqsignOut.onload=function(){
-            window.location.reload()
-            headsignin.classList.remove("display")
-            headsignout.classList.add("display")
-            
-        }
-        reqsignOut.send()
-    }
-    
-    // 登入
-    function signIn(){
-        let signineMail=document.getElementById("signinEmail").value
-        let signinPassword=document.getElementById("signinPassword").value
-        let signinError=document.getElementById("signinError")
-        if(signineMail==""|signinPassword==""){
-            signinError.classList.remove("display")
-        }else{
-            let reqsignIn=new XMLHttpRequest()
-            reqsignIn.open("patch","/api/user")
-            reqsignIn.onload=function(){
-                signindata=JSON.parse(this.responseText);
-                if (signindata["ok"]==true){
-                    window.location.reload()
-                }else{
-                    signinError.classList.remove("display")
-                }
-                
-            }
-            reqsignIn.send(JSON.stringify({"email":signineMail,"password":signinPassword}))
-        }
-    }
-    
-    //註冊
-    function signUp(){
-        let signupName=document.getElementById("signupName").value
-        let signupMail=document.getElementById("signupEmail").value
-        let signupPassword=document.getElementById("signupPassword").value
-        let signupemailError=document.getElementById("signupemailError")
-        let signupspaceError=document.getElementById("signupspaceError")
-        // 判斷input是否空白
-        if(signupName==""| signupMail==""| signupPassword==""){
-            signupspaceError.classList.remove("display")
-        }else{
-            // 連接註冊API
-            let reqsignUp=new XMLHttpRequest();
-            reqsignUp.open("post","/api/user")
-            reqsignUp.onload=function(){
-                signupdata=JSON.parse(this.responseText);
-                if(signupdata["ok"]==true){
-                    //註冊成功則自動登入
-                    let reqsignIn=new XMLHttpRequest()
-                    reqsignIn.open("patch","/api/user")
-                    reqsignIn.onload=function(){
-                        signindata=JSON.parse(this.responseText);
-                        if (signindata["ok"]==true){
-                            window.location.reload()
-                        }else{
-                            let signinError=document.getElementById("signinError")
-                            signinError.classList.remove("display")
-                        }
-                        
-                    }
-                    reqsignIn.send(JSON.stringify({"email":signupMail,"password":signupPassword}))
-                }else{
-                    // 註冊失敗顯示原因
-                    signupspaceError.classList.add("display")
-                    signupemailError.classList.remove("display")
-                }
-            }
-            reqsignUp.send(JSON.stringify({"name":signupName,"email":signupMail,"password":signupPassword}))
-
-        }
-        
-
-    }
-    // 預定行程按鈕
-    function bookingBut(){
-        let headsignout=document.getElementById("headsignout").className
-        if (headsignout=="mymouse"){
-            window.location.href="/booking"
-        }else{
-            signinWindow()
-        }
-    }
-
-    // 註冊、登入視窗
-    function signinWindow(){
-        let signIn=document.getElementById("signIn");
-        let signUp=document.getElementById("signUp");
-        let windowBackground=document.getElementById("windowBackground")
-        windowBackground.classList.remove("display");
-        signUp.classList.add("display");
-        signIn.classList.remove("display");
-        // 隱藏錯誤訊息
-        signinError.classList.add("display");
-        signupspaceError.classList.add("display");
-        signupemailError.classList.add("display");
-    }
-    function signupWindow(){
-        let signIn=document.getElementById("signIn");
-        let signUp=document.getElementById("signUp");
-        windowBackground.classList.remove("display");
-        signUp.classList.remove("display");
-        signIn.classList.add("display");
-        // 隱藏錯誤訊息
-        signinError.classList.add("display");
-        signupspaceError.classList.add("display");
-        signupemailError.classList.add("display");
-    }
-    function closeWindow(){
-        let signIn=document.getElementById("signIn");
-        let signUp=document.getElementById("signUp");
-        windowBackground.classList.add("display");
-        signUp.classList.add("display");
-        signIn.classList.add("display");
-        // 隱藏錯誤訊息
-        signupspaceError.classList.add("display");
-        signupemailError.classList.add("display");
-    }
-    
 scrolled=false
 // 監測footer距離
 let footer=document.querySelector("footer");
@@ -683,180 +97,40 @@ function infiniteScroll(){
 // 監測滾動事件
 window.addEventListener("scroll",infiniteScroll);
 
-
-
-
-function createCard(data,whileNumber){
-    // 創card中所有div
-    let content=document.getElementById("content");
-    let cardDiv=document.createElement("div");
-    let photoDiv=document.createElement("div");
-    let imgDiv=document.createElement("div");
-    let nameDiv=document.createElement("div");
-    let img = document.createElement("img");
-    let describeImg=document.createElement("div");
-    let mrtDiv=document.createElement("div");
-    let categoryDiv=document.createElement("div");
-    // 為新div設定class
-    cardDiv.classList.add("card");
-    photoDiv.classList.add("photo");
-    imgDiv.classList.add("img");
-    nameDiv.classList.add("name");            
-    describeImg.classList.add("describe");
-    mrtDiv.classList.add("mrt");
-    categoryDiv.classList.add("category");
-    // 設定超連結，滑鼠效果
-    cardDiv.setAttribute("onclick", "location.href='/attraction/"+data.data[whileNumber].id+"'");
-    cardDiv.setAttribute("onMouseOver","this.setAttribute('id','mouse')")
-    cardDiv.setAttribute("onMouseOut","this.removeAttribute('id','mouse')")
-    //抓取api資料
-    let Name = document.createTextNode(data.data[whileNumber].name);
-    let Category = document.createTextNode(data.data[whileNumber].category); 
-    // 判斷MRT是否為null
-    if(data.data[whileNumber].mrt==null){
-        var Mrt= document.createTextNode("無法搭乘捷運到達");
-    }else{
-        var Mrt = document.createTextNode(data.data[whileNumber].mrt);
-    };
-        
-    // 設定img參數
-    img.setAttribute("src",data.data[whileNumber].images[0]);
-    img.setAttribute("width","100%");
-    img.setAttribute("height","158px");
-    // 將div放入頁面
-    nameDiv.appendChild(Name);
-    mrtDiv.appendChild(Mrt);
-    categoryDiv.appendChild(Category);
-    content.appendChild(cardDiv);
-    cardDiv.appendChild(photoDiv);
-    photoDiv.appendChild(imgDiv);
-    photoDiv.appendChild(nameDiv);
-    imgDiv.appendChild(img);
-    cardDiv.appendChild(describeImg);
-    describeImg.appendChild(mrtDiv);
-    describeImg.appendChild(categoryDiv);
-};
-
+// getData
 var page=0
-// function getData(){
-        rect=footer.getBoundingClientRect();
-        window.moveTo(0,0);
-        let getDatareq=new XMLHttpRequest();
-        getDatareq.open("get","/api/attractions");
-        dbConnect=true
-        getDatareq.onload=function(){
-            let getdata=JSON.parse(this.responseText);
-            
-            // 判斷是否還有下頁資料
-            if(getdata.nextPage==null){
-                    // 印出最後一頁資料
-                    let whileNumber=0;
-                    while (whileNumber<getdata.data.length){
-                        createCard(getdata,whileNumber);
-                        whileNumber+=1;
-                    };
-            }else{
-                // 印出本頁資料
-                let whileNumber=0;
-                while (whileNumber<12){
-                    createCard(getdata,whileNumber);
-                    whileNumber+=1;
-                } 
-                page=getdata.nextPage ;
-            };
-            
-        };
-        getDatareq.send();
-        
-// }
-// 定位footer距離、移動視窗至最上方
-
-function moreData(){
-    if(scrolled==false){
-        scrolled=true
-        let reqmoreData=new XMLHttpRequest();
-        let searchInput=document.getElementById("searchInput");
-        // 判斷使用者是否使用搜尋
-        if(searchInput.value==""){
-            reqmoreData.open("get","/api/attractions?page="+page);
-            reqmoreData.onload=function(){
-                let data=JSON.parse(this.responseText);
-                // 判斷是否有下一頁
-                if(data.nextPage==null){
-                    let whileNumber=0;
-                    while (whileNumber<data.data.length){
-                        createCard(data,whileNumber);
-                        whileNumber+=1;
-                    }
-                }else{
-                    page=data.nextPage;
-                    var whileNumber=0;
-                    while (whileNumber<12){
-                        createCard(data,whileNumber);
-                        whileNumber+=1;
-                    };
-                    scrolled=false 
-                };
-            };
-        }else{
-            // 搜尋關鍵字
-            reqmoreData.open("get","/api/attractions?page="+page+"&keyword="+searchInput.value);
-            reqmoreData.onload=function(){
-                let data=JSON.parse(this.responseText);
-                // 判斷是否還有下一頁
-                if(data.nextPage==null){
-                    let whileNumber=0;
-                    while (whileNumber<data.data.length){
-                        createCard(data,whileNumber);
-                        whileNumber+=1;
-                    };
-                }else{
-                    page=data.nextPage;
-                    let whileNumber=0;
-                    while (whileNumber<12){
-                        createCard(data,whileNumber);
-                        whileNumber+=1;
-                    };
-                    scrolled=false 
-                };
-            };          
-        };    
-        reqmoreData.send();
-    };  
-};
-
-function searchData(){
-    //刪除原有元素、設定page為0
-    let content=document.getElementById("content");
-    let card = document.getElementsByClassName("card");
-    let carLength=card.length;
-    for(i=0;i<carLength;i++){
-        content.removeChild(card[0]);
-    };
-    page=0;
-    //抓取關鍵字
-    let searchInput=document.getElementById("searchInput").value;
-    let reqsearchData=new XMLHttpRequest();
-    reqsearchData.open("get","/api/attractions?page="+page+"&keyword="+searchInput);
-    reqsearchData.onload=function(){
-        let data=JSON.parse(this.responseText);
-        //判斷是否還有下一頁資料
-        if(data.nextPage==null){
-        let whileNumber=0;
-            while (whileNumber<data.data.length){
-                createCard(data,whileNumber);
-                whileNumber+=1;
-            };
-        }else{
-            page=data.nextPage;
+rect=footer.getBoundingClientRect();
+window.moveTo(0,0);
+let searchInput=document.getElementById("searchInput");
+let getDatareq=new XMLHttpRequest();
+getDatareq.open("get","/api/attractions");
+dbConnect=true
+getDatareq.onload=function(){
+    let getdata=JSON.parse(this.responseText);   
+    // 判斷是否還有下頁資料
+    if(getdata.nextPage==null){
+            // 印出最後一頁資料
             let whileNumber=0;
-            while (whileNumber<12){
-                createCard(data,whileNumber);
+            while (whileNumber<getdata.data.length){
+                createCard(getdata,whileNumber);
                 whileNumber+=1;
             };
-            scrolled=false 
-        };
+    }else{
+        // 印出本頁資料
+        let whileNumber=0;
+        while (whileNumber<12){
+            createCard(getdata,whileNumber);
+            whileNumber+=1;
+        } 
+        page=getdata.nextPage ;
     };
-    reqsearchData.send();
+    
 };
+getDatareq.send();
+
+
+
 </script>
+<!-- 字體 -->
+<link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet"/>
