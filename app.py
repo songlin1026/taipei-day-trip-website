@@ -1,28 +1,36 @@
 from flask import *
-
+from dotenv import load_dotenv, find_dotenv
+import os
 import urllib.request 
 import urllib.parse
 import json
 import mysql.connector
-import getpass
+# from flask_mysqlpool import MySQLPool
+from mysql.connector import pooling
+
 
 #mysql.connector
-password=getpass.getpass(prompt='請輸入資料庫密碼: ', stream=None)
-def DBconnect():
-	connection=mysql.connector.connect(
-		host="localhost",
-		user="root",
-		password= password,
-		database='taipeitrip',
-		charset='utf8',
-		)
-	return connection
+#load .env
+load_dotenv(find_dotenv())
+# def DBconnect():
+connect_pool=pooling.MySQLConnectionPool(
+	pool_name="taipeitrip_pool",
+	pool_size=5,
+	pool_reset_session=True,
+	host=os.getenv('MYSQL_DB_HOST'),
+	database=os.getenv('MYSQL_DB_NAME'),
+	user=os.getenv('MYSQL_USER'),
+	password=os.getenv('MYSQL_PASSWORD')
+	)
+	# return connection
+
+
 
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = os.getenv('Session_secret_key')
 
 # Pages
 @app.route("/")
@@ -44,9 +52,9 @@ def orderapi(orderNumber):
 	if session.get("member")!="":
 		ordergetData=session.get("order")
 		# 串接TapPay api
-		orderGet={"partner_key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7","records_per_page":1,"filters":{"rec_trade_id":orderNumber}}
+		orderGet={"partner_key":os.getenv('TapPay_partner_key'),"records_per_page":1,"filters":{"rec_trade_id":orderNumber}}
 		url="https://sandbox.tappaysdk.com/tpc/transaction/query"
-		headers={"content-type": "application/json","x-api-key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7"}
+		headers={"content-type": "application/json","x-api-key":os.getenv('TapPay_partner_key')}
 		orderGet=json.dumps(orderGet).encode('utf-8')
 		tappaygetResponse=urllib.request.Request(url,orderGet,headers)
 		# 解碼TapPay Data
@@ -81,57 +89,61 @@ def ordersapi():
 			orderData=json.loads(request.data.decode('utf-8'))
 			url="https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
 			payment=False
-			# 整理request
-			data={
-				"prime":orderData["prime"],
-				"partner_key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7",
-				"merchant_id":"songlin1026_TAISHIN",
-				"amount":orderData["order"]["price"],
-				"details":"taipeidayTrip",
-				"cardholder":{
-					"phone_number":orderData["order"]["contact"]["phone"],
-					"name":orderData["order"]["contact"]["name"],
-					"email":orderData["order"]["contact"]["email"],
-				}
-			}
-			data=json.dumps(data).encode('utf-8')
-			headers={"content-type": "application/json","x-api-key":"partner_tX81dhs3seS2mCZFCWgiDOy2U37uD7HBz3CV0hjxa0FjV2fT6JSJf8I7"}
-			# 開始串接TapPay 
-			tappayResponse=urllib.request.Request(url,data,headers)
-			# 解碼TapPay Data
-			tappayData=urllib.request.urlopen(tappayResponse).read().decode('utf-8')
-			tappayData=json.loads(tappayData)
-			# 整理seesion
-			ordergetsession={
-				"data":{
-					"number":tappayData["rec_trade_id"],
-					"price":orderData["order"]["price"],
-					"trip":{
-						"attraction":{
-							"id":orderData["order"]["trip"]["attraction"]["id"],
-							"name":orderData["order"]["trip"]["attraction"]["name"],
-							"address":orderData["order"]["trip"]["attraction"]["address"],
-							"image":orderData["order"]["trip"]["attraction"]["image"]
-						},
-						"date":orderData["order"]["trip"]["date"],
-						"time":orderData["order"]["trip"]["time"]
-					},
-					"contact":{
+			# 檢查資料是否缺漏
+			if orderData["order"]["contact"]["phone"]=="" or orderData["order"]["contact"]["name"]=="" or orderData["order"]["contact"]["email"]=="" or orderData["order"]["price"]=="" or orderData["prime"]=="":
+				return {"error":True,"message":"資料有缺漏"}
+			else:
+				# 整理request
+				data={
+					"prime":orderData["prime"],
+					"partner_key":os.getenv('TapPay_partner_key'),
+					"merchant_id":os.getenv('TapPay_merchant_id'),
+					"amount":orderData["order"]["price"],
+					"details":"taipeidayTrip",
+					"cardholder":{
+						"phone_number":orderData["order"]["contact"]["phone"],
 						"name":orderData["order"]["contact"]["name"],
 						"email":orderData["order"]["contact"]["email"],
-						"phone":orderData["order"]["contact"]["phone"]
-					},
-					"status":tappayData["status"]
+					}
 				}
-			}
+				data=json.dumps(data).encode('utf-8')
+				headers={"content-type": "application/json","x-api-key":os.getenv('TapPay_partner_key')}
+				# 開始串接TapPay 
+				tappayResponse=urllib.request.Request(url,data,headers)
+				# 解碼TapPay Data
+				tappayData=urllib.request.urlopen(tappayResponse).read().decode('utf-8')
+				tappayData=json.loads(tappayData)
+				# 整理seesion
+				ordergetsession={
+					"data":{
+						"number":tappayData["rec_trade_id"],
+						"price":orderData["order"]["price"],
+						"trip":{
+							"attraction":{
+								"id":orderData["order"]["trip"]["attraction"]["id"],
+								"name":orderData["order"]["trip"]["attraction"]["name"],
+								"address":orderData["order"]["trip"]["attraction"]["address"],
+								"image":orderData["order"]["trip"]["attraction"]["image"]
+							},
+							"date":orderData["order"]["trip"]["date"],
+							"time":orderData["order"]["trip"]["time"]
+						},
+						"contact":{
+							"name":orderData["order"]["contact"]["name"],
+							"email":orderData["order"]["contact"]["email"],
+							"phone":orderData["order"]["contact"]["phone"]
+						},
+						"status":tappayData["status"]
+					}
+				}
 
-			if tappayData["status"]!=0:
-				return {"error":True,"message":"訂單建立失敗"}
-			else:
-				session["order"]=ordergetsession
-				session["booking"]=""
-				payment=True
-				return {"data":{"number":tappayData["rec_trade_id"],"payment":{"status":tappayData["status"],"message":"付款成功"}}}
+				if tappayData["status"]!=0:
+					return {"error":True,"message":"訂單建立失敗"}
+				else:
+					session["order"]=ordergetsession
+					session["booking"]=""
+					payment=True
+					return {"data":{"number":tappayData["rec_trade_id"],"payment":{"status":tappayData["status"],"message":"付款成功"}}}
 		else:
 			return {"error":True,"message":"會員未登入"}
 
@@ -145,17 +157,16 @@ def bookingAPI():
 			if session.get("member")!="":
 				attractionpostData=json.loads(request.data.decode('utf-8'))
 				# 檢查訂購資料是否有誤
-				if attractionpostData["attractionId"] =="" or attractionpostData["date"] ==""  :
-					return {"error":True,"message":"訂購資料有缺誤"}
-				elif attractionpostData["time"] =="" or attractionpostData["price"] =="" :
+				if attractionpostData["attractionId"] =="" or attractionpostData["date"] =="" or attractionpostData["time"] =="" or attractionpostData["price"] =="" :
 					return {"error":True,"message":"訂購資料有缺誤"}
 				else:
 					# 抓取景點資料
 					attractionId=attractionpostData["attractionId"]
-					connection=DBconnect()
+					connection=connect_pool.get_connection()
 					cursor=connection.cursor()
 					cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 					bookingAtt=cursor.fetchone()
+					connection.close()
 					attractionId=int(bookingAtt[0])
 					attractionName=bookingAtt[1]
 					attractionAddress=bookingAtt[4]
@@ -197,10 +208,11 @@ def user():
 			if session.get("member")!="":
 				memberName=session.get("member")
 				# 連接mysql
-				connection=DBconnect()
+				connection=connect_pool.get_connection()
 				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
 				memberData=cursor.fetchone()
+				connection.close()
 				if memberData!=None:
 					return {"data":{"id":memberData[0],"name":memberData[1],"email":memberData[2]}}
 				else:
@@ -214,10 +226,11 @@ def user():
 			signin_Data=json.loads(request.data.decode('utf-8'))
 			signinEmail=signin_Data["email"]
 			# 連接mysql
-			connection=DBconnect()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
 			signinData=cursor.fetchone()
+			connection.close()
 			# 判斷是否有使用者資料
 			if signinData!=None:
 				# 檢查密碼是否與帳號相符
@@ -235,25 +248,46 @@ def user():
 			return {"ok":True}
 		# 註冊
 		elif request.method=="POST":
-			signupData=json.loads(request.data.decode('utf-8'))
-			signupEmail=signupData["email"]
-			signupName=signupData["name"]
-			signupPassword=signupData["password"]
-			if signupEmail!=None or signupName!=None or signupPassword!=None:
-				connection=DBconnect()
+			postData=json.loads(request.data.decode('utf-8'))
+			if "name" not in postData:
+				signinEmail=postData["email"]
+				# 連接mysql
+				connection=connect_pool.get_connection()
 				cursor=connection.cursor()
-				cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
-				signup_member=cursor.fetchone()
-				if signup_member==None:
-					connection=DBconnect()
-					cursor=connection.cursor()
-					cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
-					connection.commit()
-					return {"ok":True}
+				cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
+				signinData=cursor.fetchone()
+				connection.close()
+				# 判斷是否有使用者資料
+				if signinData!=None:
+					# 檢查密碼是否與帳號相符
+					if signinData[3]==postData["password"]:
+						session["member"]=signinData[1]
+						return {"ok":True}
+					else:
+						return {"error":True,"message":"信箱或密碼錯誤"}
 				else:
-					return{"error":True,"message":"重複的email"}
+					return {"error":True,"message":"信箱或密碼錯誤"}
 			else:
-				return{"error":True,"message":"資料有缺無法註冊"}
+				signupEmail=postData["email"]
+				signupName=postData["name"]
+				signupPassword=postData["password"]
+				if signupEmail!=None or signupName!=None or signupPassword!=None:
+					connection=connect_pool.get_connection()
+					cursor=connection.cursor()
+					cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
+					signup_member=cursor.fetchone()
+					connection.close()
+					if signup_member==None:
+						connection=connect_pool.get_connection()
+						cursor=connection.cursor()
+						cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
+						connection.commit()
+						connection.close()
+						return {"ok":True}
+					else:
+						return{"error":True,"message":"重複的email"}
+				else:
+					return{"error":True,"message":"資料有缺無法註冊"}
 		else:
 			return{"error":True,"message":"伺服器發生錯誤"}
 	except:	
@@ -274,13 +308,14 @@ def attractions():
 		# 是否有關鍵字
 		if keyword==None:
 			# 根據緯度排序後抓取資料
-			connection=DBconnect()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			if firstdata==0:
 				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit  %s ",[finaldata])
 			else:
 				cursor.execute("select * from taipeitrip.data order by `latitude` limit %s , %s ",[firstdata,finaldata])  #執行SQL
 			database=cursor.fetchall()
+			connection.close()
 			dataDict={}
 			data=[]
 			n=0
@@ -324,10 +359,11 @@ def attractions():
 		else:
 			# 抓取關鍵字資料
 			keyword="%"+keyword+"%"
-			connection=DBconnect()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.data  where name like %s order by latitude",[keyword])
 			database=cursor.fetchall()
+			connection.close()
 			databaseNumber=len(database)
 			dataDict={}
 			data=[]
@@ -405,10 +441,11 @@ def attractions():
 def attractionId(attractionId):
 	try:
 		# 抓取id資料
-		connection=DBconnect()
+		connection=connect_pool.get_connection()
 		cursor=connection.cursor()
 		cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 		database=cursor.fetchall()
+		connection.close()
 		databaseNumber=len(database)
 		dataDict={}
 		# 編號id是否存在
@@ -432,5 +469,5 @@ def attractionId(attractionId):
 		return {"error": True,"message": "伺服器發生錯誤"}
 
 
-# app.run(port=3000)
-app.run(host="0.0.0.0",port=3000)
+# app.run(port=80)
+app.run(host="0.0.0.0",port=80)

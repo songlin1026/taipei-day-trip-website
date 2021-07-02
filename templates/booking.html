@@ -7,346 +7,15 @@
     <!-- 字體 -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- TapPay -->
     <script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/headFoot.css" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/booking.css" charset="utf-8">
+    <!-- js -->
+    <script src="/static/member.js"></script>
     <title>台北一日遊</title>
 </head>
-<style type="text/css">
-header{
-    background: #FFFFFF;
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    height: 54px;
-    left: 0px;
-    top: 0px;
-    border-bottom: 1px solid gainsboro;
-
-
-}
-#head{
-    max-width: 1200px;
-    height: 54px;
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    margin: auto;
-}
-#headLeft{
-    color: #448899;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 34px;
-}
-#headRight{
-    color: #666666;
-    text-align: center;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 13px;
-}
-#headRight>a{
-    margin: 0px 10px;
-}
-body{
-    display: flex;
-    flex-direction: column;
-    margin: 0px;
-    font-family: 'Noto Sans TC', sans-serif;
-    align-items: center;
-
-}
-#top{
-    margin-top: 54px;
-    width: 1100px;
-    position: relative;
-    padding-left: 100px;
-}
-#topTitle{
-    margin-top: 46px;
-    margin-bottom: 35px;
-    display: flex;
-}
-
-#delete{
-    background: url(/static/icon_delete.png);
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 97px;
-    right: 110px;
-}
-.bigTitle{
-    /* margin-top: 46px; */
-    color: #666666;
-    font-size: 19px;
-    font-weight: 700;
-}
-#hero{
-    display: flex;
-    margin-left: 2px;
-    color: #666666;
-    font-weight: 400;
-    font-size: 16px;
-}
-.heroRight{
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-#bookingImg{
-    /* margin-top: 35px; */
-    width: 266px;
-    height: 200px;
-    margin-right: 22px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-
-
-}
-#name{
-    font-size: 16px;
-    color: #448899;
-    font-weight: 700;
-    /* width: 144px; */
-    height: 14px;
-    margin-top: 5px;
-    margin-bottom: 30px;
-}
-/* #nameTitle{
-    margin-right: 5px;
-} */
-.herorightTitle{
-    margin-right: 5px;
-    font-size: 16px;
-    font-weight: 700;
-    height: 14px;
-    color: #666666;
-}
-.herorightContent{
-    font-size: 16px;
-    font-weight: 400;
-    height: 14px;
-    color: #666666;
-
-}
-.middle{
-    width: 1090px;
-    padding-left: 110px;
-    /* display: flex; */
-}
-.middleContent{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 15px;
-}
-.middleTitle{
-    width: 81px;
-    /* height: 24px; */
-    color: #666666;
-    font-weight: 400;
-    font-size: 16px;
-}
-input{
-    width: 180px;
-    height: 18px;
-    padding: 10px;
-    border: 1px solid #E8E8E8;
-    font-size: 16px;
-    font-weight: 400;
-    
-}
-.middle>.bigTitle{
-    margin-bottom: 24px;
-}
-#middleWarn{
-    margin-top: 20px;
-    color: #666666;
-    font-weight: 700;
-    font-size: 16px;
-    width: 608px;
-}
-footer{
-    background: #757575;
-    height: 104px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-top: 40px;
-}
-#foot{
-    line-height: 13px;
-    margin: auto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 13px;
-    color: #FFFFFF;
-} 
-
-#totalPrice{
-    display: flex;
-    margin-bottom: 25px;
-    font-weight: 700;
-    font-size: 16px;
-    color: #666666;
-}
-#bottom{
-    width: 1090px;
-    padding-right: 110px;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-}
-#checkButton{
-    display: flex;
-    align-items: center;
-    background: #448899;
-    color: #FFFFFF;
-    font-size: 19px;
-    font-weight: 400;
-    text-align: center;
-    padding: 10px 20px;
-    width: 133px;
-    height: 16px;
-    border-radius: 5px;
-    margin-bottom: 32px;
-
-}
-.display{
-    display: none;
-}
-.mymouse{
-    cursor: pointer;
-}
-hr{
-    width: 1200px;
-}
-
-#topMiddle{
-    margin-top: 40px;
-    margin-bottom: 46px;
-}
-#middleMiddle{
-    margin-top: 45px;
-    margin-bottom: 46px;
-}
-#middleBottom{
-    margin-top: 40px;
-    margin-bottom: 43px;
-}
-
-.tpfield {
-        height: 18px;
-        width: 180px;
-        border: 1px solid #E8E8E8;
-        margin: 5px 0;
-        padding: 10px;
-        font-size:16px;
-        font-weight: 400;
-}
-
-
-
-@media screen and (min-width: 600px) and (max-width: 1200px) {
-    #head{
-        margin:  auto 10px;
-        padding:  0px 5%;
-    }
-    #header{
-        width: 100%;
-    }
-    #bottom{
-        width: 600px;
-        margin-top: 30px;
-        padding-right: 0px;
-    }
-    .bottomTitle{
-        width: 600px;
-        height: 32px;
-    }
-    hr{
-        width: 90vw;
-    }
-    #top{
-        width: 90vw;
-    }
-    .hero{
-        width: 90vw;
-    }
-    .middle{
-        width: 90vw;
-    }
-}
-
-
-@media screen and (max-width: 600px) {
-    hr{
-        width:360px;
-    }
-    #head{
-        padding:  0px 0.5%;
-    }
-    #headLeft{
-        margin-left: 10px;
-    }
-    #top{
-        width: 340px;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .middle{
-        width: 360px;
-    }
-    #bottom{
-        width: 360px;
-    }
-    #middleWarn{
-        width: 340px;
-    }
-    #hero{
-        flex-direction: column;
-    }
-    #delete{
-        top: 520px;
-        right: 10px;
-        /* position: relative; */
-    }
-    #bookingImg{
-        margin-top: 7px;
-        margin-bottom: 7px;
-        width: 340px;
-        height: 256px;
-    }
-    .middle{
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    #name{
-        margin-top: 7px;
-    }
-    #hero{
-        margin-top: 7px;
-    }
-    #topMiddle{
-        margin-top: 65px;
-    }   
-    #middleMiddle{
-        margin-top: 40px;
-        margin-bottom: 44px;
-    }
-    #bottom{
-        padding-right: 10px;
-        width: 350px;
-    }
-
-
-}
-
-</style>
 <header>
     <div id="windowBackground" class="display"></div>
     <div id="head">
@@ -355,6 +24,7 @@ hr{
             <a class="mymouse" onclick="bookingBut()">預定行程</a>
             <a id="headsignin" onclick="signinWindow()" class="mymouse">登入/註冊</a>
             <a id="headsignout" onclick="signOut()" class="display mymouse" onclick="signinWindow()">登出系統</a>
+            
         </div>  
     </div>  
 </header>
@@ -500,8 +170,6 @@ hr{
 
         // 確認是否可以 getPrime
         if (tappayStatus.canGetPrime === false) {
-            console.log(bookingData)
-            
             if(document.getElementById("phone").value==""){
                 alert("手機號碼為空白")
             }else{
@@ -516,44 +184,39 @@ hr{
                 alert('get prime error ' + result.msg)
                 return
             }
-                let orderreq=new XMLHttpRequest()
-                orderreq.open("post","/api/orders")
-                orderreq.onload=function(){
-                    let orderData=JSON.parse(this.responseText);
-                    if(orderData["data"]["payment"]["status"]==0){
-                        window.location.href="/thankyou?number="+orderData["data"]["number"]
-                    }
+            let orderreq=new XMLHttpRequest()
+            orderreq.open("post","/api/orders")
+            orderreq.onload=function(){
+                let orderData=JSON.parse(this.responseText);
+                // 確認是否訂購成功
+                if(orderData["data"]["payment"]["status"]==0){
+                    window.location.href="/thankyou?number="+orderData["data"]["number"]
+                }else{
+                    alert(orderData["message"])
                 }
-                orderrequest={
-                    "prime":result.card.prime,
-                    "order":{
-                        "price":bookingData["price"],
-                        "trip":{
-                            "attraction":{
-                                "id":bookingData["attraction"]["id"],
-                                "name":bookingData["attraction"]["name"],
-                                "address":bookingData["attraction"]["address"],
-                                "image":bookingData["attraction"]["image"]
-                            },
-                            "date":bookingData["date"],
-                            "time":bookingData["time"]
+            }
+            orderrequest={
+                "prime":result.card.prime,
+                "order":{
+                    "price":bookingData["price"],
+                    "trip":{
+                        "attraction":{
+                            "id":bookingData["attraction"]["id"],
+                            "name":bookingData["attraction"]["name"],
+                            "address":bookingData["attraction"]["address"],
+                            "image":bookingData["attraction"]["image"]
                         },
-                        "contact":{
-                            "name":getdata["data"]["name"],
-                            "email":getdata["data"]["email"],
-                            "phone":document.getElementById("phone").value
-                        }
+                        "date":bookingData["date"],
+                        "time":bookingData["time"]
+                    },
+                    "contact":{
+                        "name":getdata["data"]["name"],
+                        "email":getdata["data"]["email"],
+                        "phone":document.getElementById("phone").value
                     }
                 }
+            }
             orderreq.send(JSON.stringify(orderrequest))
-
-
-            
-            
-
-
-
-
             // send prime to your server, to pay with Pay by Prime API .
             // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
         })
