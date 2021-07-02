@@ -12,17 +12,17 @@ from mysql.connector import pooling
 #mysql.connector
 #load .env
 load_dotenv(find_dotenv())
-def DBconnect():
-	connection=pooling.MySQLConnectionPool(
-		pool_name="taipeitrip_pool",
-		pool_size=5,
-		pool_reset_session=True,
-		host=os.getenv('MYSQL_DB_HOST'),
-		database=os.getenv('MYSQL_DB_NAME'),
-		user=os.getenv('MYSQL_USER'),
-		password=os.getenv('MYSQL_PASSWORD')
-		)
-	return connection
+# def DBconnect():
+connect_pool=pooling.MySQLConnectionPool(
+	pool_name="taipeitrip_pool",
+	pool_size=5,
+	pool_reset_session=True,
+	host=os.getenv('MYSQL_DB_HOST'),
+	database=os.getenv('MYSQL_DB_NAME'),
+	user=os.getenv('MYSQL_USER'),
+	password=os.getenv('MYSQL_PASSWORD')
+	)
+	# return connection
 
 
 
@@ -162,7 +162,7 @@ def bookingAPI():
 				else:
 					# 抓取景點資料
 					attractionId=attractionpostData["attractionId"]
-					connection=DBconnect().get_connection()
+					connection=connect_pool.get_connection()
 					cursor=connection.cursor()
 					cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 					bookingAtt=cursor.fetchone()
@@ -208,7 +208,7 @@ def user():
 			if session.get("member")!="":
 				memberName=session.get("member")
 				# 連接mysql
-				connection=DBconnect().get_connection()
+				connection=connect_pool.get_connection()
 				cursor=connection.cursor()
 				cursor.execute("select * from taipeitrip.member where name=%s",[memberName])
 				memberData=cursor.fetchone()
@@ -226,7 +226,7 @@ def user():
 			signin_Data=json.loads(request.data.decode('utf-8'))
 			signinEmail=signin_Data["email"]
 			# 連接mysql
-			connection=DBconnect().get_connection()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
 			signinData=cursor.fetchone()
@@ -248,27 +248,46 @@ def user():
 			return {"ok":True}
 		# 註冊
 		elif request.method=="POST":
-			signupData=json.loads(request.data.decode('utf-8'))
-			signupEmail=signupData["email"]
-			signupName=signupData["name"]
-			signupPassword=signupData["password"]
-			if signupEmail!=None or signupName!=None or signupPassword!=None:
-				connection=DBconnect().get_connection()
+			postData=json.loads(request.data.decode('utf-8'))
+			if "name" not in postData:
+				signinEmail=postData["email"]
+				# 連接mysql
+				connection=connect_pool.get_connection()
 				cursor=connection.cursor()
-				cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
-				signup_member=cursor.fetchone()
+				cursor.execute("select * from taipeitrip.member where email=%s",[signinEmail])
+				signinData=cursor.fetchone()
 				connection.close()
-				if signup_member==None:
-					connection=DBconnect().get_connection()
-					cursor=connection.cursor()
-					cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
-					connection.commit()
-					connection.close()
-					return {"ok":True}
+				# 判斷是否有使用者資料
+				if signinData!=None:
+					# 檢查密碼是否與帳號相符
+					if signinData[3]==postData["password"]:
+						session["member"]=signinData[1]
+						return {"ok":True}
+					else:
+						return {"error":True,"message":"信箱或密碼錯誤"}
 				else:
-					return{"error":True,"message":"重複的email"}
+					return {"error":True,"message":"信箱或密碼錯誤"}
 			else:
-				return{"error":True,"message":"資料有缺無法註冊"}
+				signupEmail=postData["email"]
+				signupName=postData["name"]
+				signupPassword=postData["password"]
+				if signupEmail!=None or signupName!=None or signupPassword!=None:
+					connection=connect_pool.get_connection()
+					cursor=connection.cursor()
+					cursor.execute("select * from taipeitrip.member where email=%s",[signupEmail])
+					signup_member=cursor.fetchone()
+					connection.close()
+					if signup_member==None:
+						connection=connect_pool.get_connection()
+						cursor=connection.cursor()
+						cursor.execute("insert into taipeitrip.member (name,email,password) values (%s,%s,%s) ",[signupName,signupEmail,signupPassword])
+						connection.commit()
+						connection.close()
+						return {"ok":True}
+					else:
+						return{"error":True,"message":"重複的email"}
+				else:
+					return{"error":True,"message":"資料有缺無法註冊"}
 		else:
 			return{"error":True,"message":"伺服器發生錯誤"}
 	except:	
@@ -289,7 +308,7 @@ def attractions():
 		# 是否有關鍵字
 		if keyword==None:
 			# 根據緯度排序後抓取資料
-			connection=DBconnect().get_connection()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			if firstdata==0:
 				cursor.execute("select * from taipeitrip.data ORDER BY `latitude` limit  %s ",[finaldata])
@@ -340,7 +359,7 @@ def attractions():
 		else:
 			# 抓取關鍵字資料
 			keyword="%"+keyword+"%"
-			connection=DBconnect().get_connection()
+			connection=connect_pool.get_connection()
 			cursor=connection.cursor()
 			cursor.execute("select * from taipeitrip.data  where name like %s order by latitude",[keyword])
 			database=cursor.fetchall()
@@ -422,7 +441,7 @@ def attractions():
 def attractionId(attractionId):
 	try:
 		# 抓取id資料
-		connection=DBconnect().get_connection()
+		connection=connect_pool.get_connection()
 		cursor=connection.cursor()
 		cursor.execute("select * from taipeitrip.data where id=%s",[attractionId])
 		database=cursor.fetchall()
@@ -450,5 +469,5 @@ def attractionId(attractionId):
 		return {"error": True,"message": "伺服器發生錯誤"}
 
 
-app.run(port=80)
-# app.run(host="0.0.0.0",port=80)
+# app.run(port=80)
+app.run(host="0.0.0.0",port=80)

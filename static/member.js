@@ -102,13 +102,14 @@ function signIn(){
         signinError.classList.remove("display")
     }else{
         let reqsignIn=new XMLHttpRequest()
-        reqsignIn.open("patch","/api/user")
+        reqsignIn.open("post","/api/user")
         reqsignIn.onload=function(){
             signindata=JSON.parse(this.responseText);
             if (signindata["ok"]==true){
                 window.location.reload()
             }else{
                 signinError.classList.remove("display")
+                console.log(signindata)
             }
             
         }
@@ -134,7 +135,7 @@ function signUp(){
             if(signupdata["ok"]==true){
                 //註冊成功則自動登入
                 let reqsignIn=new XMLHttpRequest()
-                reqsignIn.open("patch","/api/user")
+                reqsignIn.open("post","/api/user")
                 reqsignIn.onload=function(){
                     signindata=JSON.parse(this.responseText);
                     if (signindata["ok"]==true){
