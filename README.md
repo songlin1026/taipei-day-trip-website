@@ -8,7 +8,7 @@ You can choose the attraction that you like and book to take a trip
 * AWS-EC2、Linux
 * Python-Flask
 * MySQL build on EC2
-* Credit card payment system (TapPay)
+* Credit card payment system-TapPay
 * Use AJAX with Open Government API
 * HTML
 * CSS
