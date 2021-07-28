@@ -3,7 +3,7 @@
 It is a website for user to search attractions in Taipei.
 You can choose the attraction that you like and book to take a trip
 ```
-![image](https://github.com/songlin1026/taipei-day-trip-website/blob/main/Demo.png)
+![image](https://github.com/songlin1026/member/blob/main/TaipeiTrip-Demo.png)
 # Technologies
 * AWS-EC2、Linux
 * Python-Flask
