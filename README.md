@@ -1,6 +1,6 @@
 # taipei-day-trip-website
 ```
-It is a website for users to search attractions in Taipei.
+It is a website for users to search for attractions in Taipei.
 You can choose the attraction that you like and book to take a trip
 ```
 ![image](https://github.com/songlin1026/member/blob/main/TaipeiTrip-Demo.png)
