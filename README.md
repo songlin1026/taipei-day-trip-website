@@ -8,6 +8,7 @@ You can choose the attraction that you like and book to take a trip
 * AWS-EC2(Linux)
 * Python-Flask
 * MySQL build on EC2
+* RESTful API
 * Credit card payment system-TapPay
 * Infinite scrolling 
 * Keyword search for the attractions
