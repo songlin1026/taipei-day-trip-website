@@ -5,14 +5,13 @@ import urllib.request
 import urllib.parse
 import json
 import mysql.connector
-# from flask_mysqlpool import MySQLPool
 from mysql.connector import pooling
 
 
-#mysql.connector
+
 #load .env
 load_dotenv(find_dotenv())
-# def DBconnect():
+#mysql.connector
 connect_pool=pooling.MySQLConnectionPool(
 	pool_name="taipeitrip_pool",
 	pool_size=5,
@@ -22,9 +21,6 @@ connect_pool=pooling.MySQLConnectionPool(
 	user=os.getenv('MYSQL_USER'),
 	password=os.getenv('MYSQL_PASSWORD')
 	)
-	# return connection
-
-
 
 
 app=Flask(__name__)
@@ -77,9 +73,6 @@ def orderapi(orderNumber):
 			return {"error":True,"message":"查無交易紀錄"}
 	else:
 		return{"error":True,"message":"使用者未登入"}
-
-
-
 
 
 @app.route("/api/orders",methods=["POST"])
@@ -146,7 +139,6 @@ def ordersapi():
 					return {"data":{"number":tappayData["rec_trade_id"],"payment":{"status":tappayData["status"],"message":"付款成功"}}}
 		else:
 			return {"error":True,"message":"會員未登入"}
-
 
 
 @app.route("/api/booking",methods=["GET","POST","DELETE"])
@@ -468,6 +460,4 @@ def attractionId(attractionId):
 	except:
 		return {"error": True,"message": "伺服器發生錯誤"}
 
-
-# app.run(port=80)
 app.run(host="0.0.0.0",port=80)
