@@ -5,17 +5,15 @@ You can choose the attraction that you like and book to take a trip
 ```
 ![image](https://github.com/songlin1026/member/blob/main/taipeitripDemo/TaipeiTrip-Demo.png)
 # Technologies
-* AWS-EC2(Linux)
-* Python-Flask
-* MySQL build on EC2
-* RESTful API
-* Credit card payment system-TapPay
-* Infinite scrolling 
-* Keyword search for the attractions
-* HTML
-* CSS
-* JavaScript
-* Responsive Web Design 
+* 使用 Python Flask 作為後端框架。
+* RESTful API 架構實踐專案功能。
+* 將網站部署至 EC2 ，並用 Nginx 進行反向代理。
+* 藉由 Open Government API 收集景點資料並新增至 MySQL 資料庫。
+* 結合 TapPay 開發付款系統。
+* 景點關鍵字搜尋
+* 以 HTML / CSS  設計 RWD 頁面。
+* 使用 JavaScript 達到 AJAX 及 前端功能開發。
+* 無限滾動 ( Infinite scrolling ) 
 
 # Demo
 https://taipeitrip.website/
